@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirLab - Pneumatic Test Bench</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .calibration-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .calibration-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .channel-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .channel-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .channel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .channel-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .status-ok { background: #28a745; color: white; }
+        .status-error { background: #dc3545; color: white; }
+        .status-warning { background: #ffc107; color: #333; }
+        
+        .channel-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .pressure-value {
+            color: #667eea;
+        }
+        
+        .channel-unit {
+            color: #666;
+            font-size: 0.35em;
+            margin-left: 5px;
+        }
+        
+        .channel-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .detail-item {
+            text-align: center;
+        }
+        
+        .detail-label {
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            color: #333;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .info-text {
+            color: #666;
+            font-size: 1em;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .vacuum-indicator {
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <span class="status-indicator" id="statusIndicator"></span>
+                🔬 AirLab - Pneumatic Test Bench
+                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v1.4.0</span>
+            </h1>
+        </header>
+
+        <div class="calibration-panel">
+            <div class="calibration-buttons">
+                <button class="btn btn-primary" onclick="calibrateAll()">
+                    📏 Calibrate All Channels
+                </button>
+                <button class="btn btn-secondary" onclick="resetCalibration()">
+                    🔄 Reset Calibration
+                </button>
+                <button class="btn btn-secondary" onclick="toggleUnit()">
+                    🔀 <span id="unitToggleText">Switch to bar</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="messageContainer"></div>
+
+        <div class="channels-grid">
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title">Vacuum 1</div>
+                    <span class="status-badge status-ok" id="status-ch1">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch1">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch1"></span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title">Vacuum 2</div>
+                    <span class="status-badge status-ok" id="status-ch2">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch2">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch2"></span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title">Vacuum 3</div>
+                    <span class="status-badge status-ok" id="status-ch3">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch3">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch3"></span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title">Vacuum 4</div>
+                    <span class="status-badge status-ok" id="status-ch4">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch4">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch4"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p class="info-text">
+                <a href="/debug" style="color: #667eea; text-decoration: none; font-weight: bold;">🔍 Debug Page</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Unit toggle state (default: mbar)
+        let currentUnit = 'mbar';
+
+        function toggleUnit() {
+            if (currentUnit === 'mbar') {
+                currentUnit = 'bar';
+                document.getElementById('unitToggleText').textContent = 'Switch to mbar';
+            } else {
+                currentUnit = 'mbar';
+                document.getElementById('unitToggleText').textContent = 'Switch to bar';
+            }
+            // Refresh display with new unit
+            updateData();
+        }
+
+        function convertToDisplayValue(mbarValue) {
+            if (currentUnit === 'bar') {
+                return (mbarValue / 1000).toFixed(3);
+            }
+            return mbarValue;
+        }
+
+        function getCurrentUnit() {
+            return currentUnit;
+        }
+
+        function updateData() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update channel values and status
+                        for (let i = 1; i <= 4; i++) {
+                            const ch = data.channels[`ch${i}`];
+                            
+                            // Update pressure value with unit conversion
+                            const pressure = ch.pressure_mbar;
+                            const displayValue = convertToDisplayValue(pressure);
+                            const unit = getCurrentUnit();
+                            
+                            document.getElementById(`pressure-ch${i}`).textContent = displayValue;
+                            
+                            // Update unit display
+                            const unitSpans = document.querySelectorAll('.channel-unit');
+                            unitSpans.forEach(span => {
+                                span.textContent = unit;
+                            });
+                            
+                            // Update vacuum indicator
+                            const vacuumIndicator = document.getElementById(`vacuum-ch${i}`);
+                            if (pressure < -50) {
+                                vacuumIndicator.textContent = '💨';
+                                vacuumIndicator.title = 'Vacuum active';
+                            } else {
+                                vacuumIndicator.textContent = '';
+                            }
+                            
+                            // Update status badge
+                            const statusBadge = document.getElementById(`status-ch${i}`);
+                            statusBadge.textContent = ch.status;
+                            statusBadge.className = 'status-badge ' + 
+                                (ch.status === 'OK' ? 'status-ok' : 
+                                 ch.status === 'ERROR' ? 'status-error' : 'status-warning');
+                        }
+                        
+                        // Clear any error messages
+                        const messageContainer = document.getElementById('messageContainer');
+                        if (messageContainer.innerHTML.includes('error-message')) {
+                            messageContainer.innerHTML = '';
+                        }
+                    } else {
+                        showError('Failed to read data from EtherCAT master');
+                    }
+                })
+                .catch(error => {
+                    showError('Connection error: ' + error);
+                });
+        }
+
+        function calibrateAll() {
+            fetch('/api/calibrate', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showSuccess(data.message);
+                        updateData(); // Refresh immediately
+                    } else {
+                        showError('Calibration failed: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    showError('Calibration error: ' + error);
+                });
+        }
+
+        function resetCalibration() {
+            if (confirm('Reset all calibration offsets to zero?')) {
+                fetch('/api/reset_calibration', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showSuccess(data.message);
+                            updateData(); // Refresh immediately
+                        } else {
+                            showError('Reset failed: ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        showError('Reset error: ' + error);
+                    });
+            }
+        }
+
+        function showError(message) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = 
+                `<div class="error-message">⚠️ ${message}</div>`;
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = 
+                `<div class="success-message">✅ ${message}</div>`;
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 3000);
+        }
+
+        // Auto-refresh every 500ms (2 Hz)
+        setInterval(updateData, 500);
+        
+        // Initial load
+        updateData();
+    </script>
+</body>
+</html>
