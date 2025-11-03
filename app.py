@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 """
 AirLab - Pneumatic Test Bench System
-Version: 1.4.0
+Version: 1.4.1
 Changes:
+  - v1.5.0: Moved CSS to external file, added EN/PT language support, added shutdown/reboot
+  - v1.4.1: Changed icon to ðŸ’¨, blue theme, simplified buttons, default unit bar
   - v1.4.0: Added mbar/bar unit toggle, simplified main page, renamed to AirLab
   - v1.3.0: Rounded averages to integers, moved debug info to separate page
   - v1.2.0: Added moving average filtering (10 samples) to stabilize readings
   - v1.1.0: Changed refresh rate to 2Hz (500ms), updated channel labels to "Vacuum X"
   - v1.0.0: Initial release with auto-calibration support
 """
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
 from datetime import datetime
 from collections import deque
 import json
 import os
 
-app = Flask(__name__)
-VERSION = "1.4.0"
+app = Flask(__name__, static_folder='static', static_url_path='/static')
+VERSION = "1.5.0"
 PROJECT_NAME = "AirLab"
 
 # File to store calibration offsets
@@ -207,6 +209,38 @@ def api_activate():
 @app.route('/api/version')
 def api_version():
     return jsonify({'version': VERSION})
+
+@app.route('/api/shutdown', methods=['POST'])
+def api_shutdown():
+    """Shutdown the Raspberry Pi"""
+    try:
+        import subprocess
+        subprocess.Popen(['sudo', 'shutdown', '-h', 'now'])
+        return jsonify({
+            'success': True,
+            'message': 'Raspberry Pi is shutting down...'
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
+
+@app.route('/api/reboot', methods=['POST'])
+def api_reboot():
+    """Reboot the Raspberry Pi"""
+    try:
+        import subprocess
+        subprocess.Popen(['sudo', 'reboot'])
+        return jsonify({
+            'success': True,
+            'message': 'Raspberry Pi is rebooting...'
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
 
 if __name__ == '__main__':
     print("\n" + "="*60)

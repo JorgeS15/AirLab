@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirLab - Pneumatic Test Bench</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/translations.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <span class="status-indicator" id="statusIndicator"></span>
+                💨 <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
+                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v1.4.1</span>
+            </h1>
+            <div class="language-selector">
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            </div>
+        </header>
+
+        <div class="calibration-panel">
+            <div class="calibration-buttons">
+                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate">Calibrate</button>
+                <button class="btn btn-secondary" onclick="resetCalibration()" data-i18n="reset">Reset</button>
+                <button class="btn btn-secondary" onclick="toggleUnit()"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
+            </div>
+        </div>
+
+        <div id="messageContainer"></div>
+
+        <div class="channels-grid">
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum1">Vacuum 1</div>
+                    <span class="status-badge status-ok" id="status-ch1">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch1">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch1"></span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum2">Vacuum 2</div>
+                    <span class="status-badge status-ok" id="status-ch2">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch2">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch2"></span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum3">Vacuum 3</div>
+                    <span class="status-badge status-ok" id="status-ch3">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch3">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch3"></span>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum4">Vacuum 4</div>
+                    <span class="status-badge status-ok" id="status-ch4">OK</span>
+                </div>
+                <div class="channel-value pressure-value">
+                    <span id="pressure-ch4">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch4"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">🔍 <span data-i18n="debugPage">Debug Page</span></a>
+                <button class="btn btn-danger" onclick="shutdownRaspberry()" style="padding: 8px 16px; font-size: 0.9em;">
+                    🔴 <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Translation update function for this page
+        function updatePageTranslations() {
+            // Update title
+            const titleSpan = document.querySelector('[data-i18n="title"]');
+            if (titleSpan) titleSpan.textContent = t('title');
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (key && translations[currentLang] && translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+            
+            // Update status badges
+            document.querySelectorAll('.status-badge').forEach(badge => {
+                const status = badge.textContent.trim();
+                if (status === 'OK') badge.textContent = t('statusOk');
+                else if (status === 'ERROR' || status === 'ERRO') badge.textContent = t('statusError');
+                else if (status === 'WARNING' || status === 'AVISO') badge.textContent = t('statusWarning');
+            });
+        }
+        
+    
+        // Unit toggle state (default: bar)
+        let currentUnit = 'bar';
+
+        function toggleUnit() {
+            if (currentUnit === 'mbar') {
+                currentUnit = 'bar';
+                document.getElementById('unitToggleText').textContent = 'mbar';
+            } else {
+                currentUnit = 'mbar';
+                document.getElementById('unitToggleText').textContent = 'bar';
+            }
+            // Refresh display with new unit
+            updateData();
+        }
+
+        function convertToDisplayValue(mbarValue) {
+            if (currentUnit === 'bar') {
+                return (mbarValue / 1000).toFixed(3);
+            }
+            return mbarValue;
+        }
+
+        function getCurrentUnit() {
+            return currentUnit;
+        }
+
+        function updateData() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update channel values and status
+                        for (let i = 1; i <= 4; i++) {
+                            const ch = data.channels[`ch${i}`];
+                            
+                            // Update pressure value with unit conversion
+                            const pressure = ch.pressure_mbar;
+                            const displayValue = convertToDisplayValue(pressure);
+                            const unit = getCurrentUnit();
+                            
+                            document.getElementById(`pressure-ch${i}`).textContent = displayValue;
+                            
+                            // Update unit display
+                            const unitSpans = document.querySelectorAll('.channel-unit');
+                            unitSpans.forEach(span => {
+                                span.textContent = unit;
+                            });
+                            
+                            // Update vacuum indicator
+                            const vacuumIndicator = document.getElementById(`vacuum-ch${i}`);
+                            if (pressure < -50) {
+                                vacuumIndicator.textContent = '💨';
+                                vacuumIndicator.title = 'Vacuum active';
+                            } else {
+                                vacuumIndicator.textContent = '';
+                            }
+                            
+                            // Update status badge
+                            const statusBadge = document.getElementById(`status-ch${i}`);
+                            statusBadge.textContent = ch.status;
+                            statusBadge.className = 'status-badge ' + 
+                                (ch.status === 'OK' ? 'status-ok' : 
+                                 ch.status === 'ERROR' ? 'status-error' : 'status-warning');
+                        }
+                        
+                        // Clear any error messages
+                        const messageContainer = document.getElementById('messageContainer');
+                        if (messageContainer.innerHTML.includes('error-message')) {
+                            messageContainer.innerHTML = '';
+                        }
+                    } else {
+                        showError('Failed to read data from EtherCAT master');
+                    }
+                })
+                .catch(error => {
+                    showError('Connection error: ' + error);
+                });
+        }
+
+        function calibrateAll() {
+            fetch('/api/calibrate', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showSuccess(t('calibrationSuccess'));
+                        updateData(); // Refresh immediately
+                    } else {
+                        showError(t('calibrationFailed') + ' ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    showError(t('connectionError') + ' ' + error);
+                });
+        }
+
+        function resetCalibration() {
+            if (confirm(t('resetConfirm'))) {
+                fetch('/api/reset_calibration', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showSuccess(t('resetSuccess'));
+                            updateData(); // Refresh immediately
+                        } else {
+                            showError('Reset failed: ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        showError('Reset error: ' + error);
+                    });
+            }
+        }
+
+        function showError(message) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = 
+                `<div class="error-message">âš ï¸ ${message}</div>`;
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = 
+                `<div class="success-message">✅ ${message}</div>`;
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 3000);
+        }
+
+        function shutdownRaspberry() {
+            if (confirm('⚠️ ' + t('shutdownConfirm'))) {
+                fetch('/api/shutdown', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showSuccess(t('shutdownSuccess'));
+                        } else {
+                            showError('Shutdown failed: ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        showError('Shutdown error: ' + error);
+                    });
+            }
+        }
+
+        // Auto-refresh every 500ms (2 Hz)
+        setInterval(updateData, 500);
+        
+        // Initial load
+        updateData();
+    </script>
+</body>
+</html>
