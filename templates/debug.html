@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - AirLab</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/translations.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <span class="status-indicator" id="statusIndicator"></span>
+                💨 <span data-i18n="debugMode">Debug Mode - AirLab</span>
+                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v1.4.1</span>
+            </h1>
+            <div class="language-selector">
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            </div>
+            <a href="/" class="nav-link">â† Back to Main View</a>
+            <div class="timestamp" id="timestamp">Last update: --</div>
+        </header>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <h3 style="color: #333; margin-bottom: 10px;">ðŸ“ Calibration Instructions</h3>
+            <p style="color: #666; line-height: 1.6;">
+                <strong>To calibrate:</strong> Expose all suction cups to atmospheric pressure (no vacuum), 
+                then click "Calibrate All Channels" on the main page to zero the readings.
+            </p>
+        </div>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <p style="color: #666; line-height: 1.6;">
+                📊 <strong>Moving average filter:</strong> 10 samples for stable readings<br>
+                âš™️ <strong>System status:</strong> Make sure <code>ethercat_app</code> is running!
+            </p>
+        </div>
+
+        <div id="messageContainer"></div>
+
+        <div class="channels-grid">
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum1">Vacuum 1</div>
+                    <span class="status-badge status-ok" id="status-ch1">OK</span>
+                </div>
+                <div class="pressure-main" id="pressure-ch1">--- mbar</div>
+                <div class="debug-table">
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="rawValue">Raw Value:</span>
+                        <span class="debug-value" id="raw-ch1">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="offset">Offset:</span>
+                        <span class="debug-value" id="offset-ch1">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="instantPressure">Instant Pressure:</span>
+                        <span class="debug-value" id="instant-ch1">--- mbar</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-value" id="samples-ch1">---</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum2">Vacuum 2</div>
+                    <span class="status-badge status-ok" id="status-ch2">OK</span>
+                </div>
+                <div class="pressure-main" id="pressure-ch2">--- mbar</div>
+                <div class="debug-table">
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="rawValue">Raw Value:</span>
+                        <span class="debug-value" id="raw-ch2">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="offset">Offset:</span>
+                        <span class="debug-value" id="offset-ch2">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="instantPressure">Instant Pressure:</span>
+                        <span class="debug-value" id="instant-ch2">--- mbar</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-value" id="samples-ch2">---</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum3">Vacuum 3</div>
+                    <span class="status-badge status-ok" id="status-ch3">OK</span>
+                </div>
+                <div class="pressure-main" id="pressure-ch3">--- mbar</div>
+                <div class="debug-table">
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="rawValue">Raw Value:</span>
+                        <span class="debug-value" id="raw-ch3">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="offset">Offset:</span>
+                        <span class="debug-value" id="offset-ch3">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="instantPressure">Instant Pressure:</span>
+                        <span class="debug-value" id="instant-ch3">--- mbar</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-value" id="samples-ch3">---</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-header">
+                    <div class="channel-title" data-i18n="vacuum4">Vacuum 4</div>
+                    <span class="status-badge status-ok" id="status-ch4">OK</span>
+                </div>
+                <div class="pressure-main" id="pressure-ch4">--- mbar</div>
+                <div class="debug-table">
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="rawValue">Raw Value:</span>
+                        <span class="debug-value" id="raw-ch4">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="offset">Offset:</span>
+                        <span class="debug-value" id="offset-ch4">---</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="instantPressure">Instant Pressure:</span>
+                        <span class="debug-value" id="instant-ch4">--- mbar</span>
+                    </div>
+                    <div class="debug-row">
+                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-value" id="samples-ch4">---</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                🔍 Debug information updates at 2Hz |
+                <a href="/" style="color: #4b6cb7; text-decoration: none;"><span data-i18n="backToMain">Back to Main View</span></a>
+                <button class="btn btn-danger" onclick="rebootRaspberry()" style="padding: 8px 16px; font-size: 0.9em;">
+                    🔄 <span data-i18n="reboot">Reboot Raspberry Pi</span>
+                </button>
+            </p>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Translation update function for debug page
+        function updatePageTranslations() {
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (key && translations[currentLang] && translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+            
+            // Update status badges
+            document.querySelectorAll('.status-badge').forEach(badge => {
+                const status = badge.textContent.trim();
+                if (status === 'OK') badge.textContent = t('statusOk');
+                else if (status === 'ERROR' || status === 'ERRO') badge.textContent = t('statusError');
+                else if (status === 'WARNING' || status === 'AVISO') badge.textContent = t('statusWarning');
+            });
+            
+            // Update "Last update" text
+            const timestampDiv = document.getElementById('timestamp');
+            if (timestampDiv && timestampDiv.textContent.includes('Last update')) {
+                const time = timestampDiv.textContent.split(': ')[1] || '--';
+                timestampDiv.textContent = t('lastUpdate') + ' ' + time;
+            }
+        }
+        
+    
+        function updateData() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update timestamp
+                        const time = new Date(data.timestamp);
+                        document.getElementById('timestamp').textContent = 
+                            `Last update: ${time.toLocaleTimeString()}`;
+                        
+                        // Update channel values and debug info
+                        for (let i = 1; i <= 4; i++) {
+                            const ch = data.channels[`ch${i}`];
+                            
+                            // Update main pressure display
+                            document.getElementById(`pressure-ch${i}`).textContent = 
+                                `${ch.pressure_mbar} mbar`;
+                            
+                            // Update debug information
+                            document.getElementById(`raw-ch${i}`).textContent = 
+                                ch.raw_value.toLocaleString();
+                            document.getElementById(`offset-ch${i}`).textContent = 
+                                ch.offset.toLocaleString();
+                            document.getElementById(`instant-ch${i}`).textContent = 
+                                `${ch.instant_pressure} mbar`;
+                            document.getElementById(`samples-ch${i}`).textContent = 
+                                `${ch.samples_in_avg}/10`;
+                            
+                            // Update status badge
+                            const statusBadge = document.getElementById(`status-ch${i}`);
+                            statusBadge.textContent = ch.status;
+                            statusBadge.className = 'status-badge ' + 
+                                (ch.status === 'OK' ? 'status-ok' : 
+                                 ch.status === 'ERROR' ? 'status-error' : 'status-warning');
+                        }
+                        
+                        // Clear error messages
+                        const messageContainer = document.getElementById('messageContainer');
+                        if (messageContainer.innerHTML.includes('error-message')) {
+                            messageContainer.innerHTML = '';
+                        }
+                    } else {
+                        showError(t('readError'));
+                    }
+                })
+                .catch(error => {
+                    showError(t('connectionError') + ': ' + error);
+                });
+        }
+
+        function showError(message) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = 
+                `<div class="error-message">⚠️ ${message}</div>`;
+        }
+
+
+        function rebootRaspberry() {
+            if (confirm('⚠️ ' + t('rebootConfirm'))) {
+                fetch('/api/reboot', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const messageContainer = document.getElementById('messageContainer');
+                            messageContainer.innerHTML = 
+                                `<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">✅ Raspberry Pi is rebooting...</div>`;
+                        } else {
+                            showError('Reboot failed: ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        showError('Reboot error: ' + error);
+                    });
+            }
+        }
+
+        // Auto-refresh every 500ms (2 Hz)
+        setInterval(updateData, 500);
+        
+        // Initial load
+        updateData();
+    </script>
+</body>
+</html>
