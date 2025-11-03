@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 AirLab - Pneumatic Test Bench System
-Version: 1.4.1
+Version: 1.5.0
 Changes:
-  - v1.5.0: Moved CSS to external file, added EN/PT language support, added shutdown/reboot
+  - v1.5.0: Reorganized UI - moved buttons to bottom, Reset moved to debug page, cleaned docs
   - v1.4.1: Changed icon to ðŸ’¨, blue theme, simplified buttons, default unit bar
   - v1.4.0: Added mbar/bar unit toggle, simplified main page, renamed to AirLab
   - v1.3.0: Rounded averages to integers, moved debug info to separate page
