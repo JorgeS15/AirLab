@@ -13,21 +13,13 @@
             <h1>
                 <span class="status-indicator" id="statusIndicator"></span>
                 💨 <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
-                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v1.4.1</span>
+                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v1.5.0</span>
             </h1>
             <div class="language-selector">
                 <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
                 <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
             </div>
         </header>
-
-        <div class="calibration-panel">
-            <div class="calibration-buttons">
-                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate">Calibrate</button>
-                <button class="btn btn-secondary" onclick="resetCalibration()" data-i18n="reset">Reset</button>
-                <button class="btn btn-secondary" onclick="toggleUnit()"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
-            </div>
-        </div>
 
         <div id="messageContainer"></div>
 
@@ -78,6 +70,13 @@
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch4"></span>
                 </div>
+            </div>
+        </div>
+
+        <div class="calibration-panel">
+            <div class="calibration-buttons">
+                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate">Calibrate</button>
+                <button class="btn btn-secondary" onclick="toggleUnit()"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
             </div>
         </div>
 
