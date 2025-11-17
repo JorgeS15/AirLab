@@ -4,7 +4,7 @@ AirLab - Pneumatic Test Bench System
 Version: 1.5.0
 Changes:
   - v1.5.0: Reorganized UI - moved buttons to bottom, Reset moved to debug page, cleaned docs
-  - v1.4.1: Changed icon to ðŸ’¨, blue theme, simplified buttons, default unit bar
+  - v1.4.1: Changed icon to Ã°Å¸â€™Â¨, blue theme, simplified buttons, default unit bar
   - v1.4.0: Added mbar/bar unit toggle, simplified main page, renamed to AirLab
   - v1.3.0: Rounded averages to integers, moved debug info to separate page
   - v1.2.0: Added moving average filtering (10 samples) to stabilize readings
@@ -123,6 +123,10 @@ def index():
 def debug():
     return render_template('debug.html')
 
+@app.route('/signals')
+def signals():
+    return render_template('signals.html')
+
 @app.route('/api/data')
 def api_data():
     values = read_values_from_file()
@@ -137,6 +141,35 @@ def api_data():
     return jsonify({
         'success': False,
         'error': 'Failed to read data from /tmp/ethercat_data.txt'
+    })
+
+@app.route('/api/digital')
+def api_digital():
+    """Read digital inputs from file"""
+    try:
+        with open('/tmp/ethercat_digital.txt', 'r') as f:
+            line = f.read().strip()
+            values_list = [int(x) for x in line.split(',')]
+            
+            if len(values_list) == 8:
+                result = {}
+                for i in range(8):
+                    result[f'input_{i+1}'] = {
+                        'value': values_list[i],
+                        'state': 'ON' if values_list[i] == 1 else 'OFF'
+                    }
+                
+                return jsonify({
+                    'success': True,
+                    'timestamp': datetime.now().isoformat(),
+                    'inputs': result
+                })
+    except Exception as e:
+        print(f"Error reading digital inputs: {e}")
+    
+    return jsonify({
+        'success': False,
+        'error': 'Failed to read data from /tmp/ethercat_digital.txt'
     })
 
 @app.route('/api/calibrate', methods=['POST'])

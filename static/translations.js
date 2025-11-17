@@ -4,6 +4,7 @@ const translations = {
         // Header
         title: "AirLab - Pneumatic Test Bench",
         debugMode: "Debug Mode - AirLab",
+        signalsTitle: "Digital Signals - AirLab",
         
         // Buttons
         calibrate: "Calibrate",
@@ -15,6 +16,7 @@ const translations = {
         // Navigation
         backToMain: "Back to Main View",
         debugPage: "Debug Page",
+        signalsPage: "Digital Signals",
         
         // Channel labels
         vacuum1: "Vacuum 1",
@@ -22,10 +24,22 @@ const translations = {
         vacuum3: "Vacuum 3",
         vacuum4: "Vacuum 4",
         
+        // Digital inputs
+        input1: "Input 1",
+        input2: "Input 2",
+        input3: "Input 3",
+        input4: "Input 4",
+        input5: "Input 5",
+        input6: "Input 6",
+        input7: "Input 7",
+        input8: "Input 8",
+        
         // Status
         statusOk: "OK",
         statusError: "ERROR",
         statusWarning: "WARNING",
+        statusOn: "ON",
+        statusOff: "OFF",
         
         // Debug info
         rawValue: "Raw Value:",
@@ -36,6 +50,8 @@ const translations = {
         // Info messages
         debugInfo: "Debug information updates at 2Hz",
         lastUpdate: "Last update:",
+        digitalInputsInfo: "Digital Inputs Status - Updates at 2Hz",
+        signalsUpdateInfo: "Digital signals update automatically at 2Hz",
         
         // Calibration instructions
         calibrationTitle: "Calibration Instructions",
@@ -63,7 +79,7 @@ const translations = {
     },
     pt: {
         // Header
-        title: "AirLab - Bancada de Testes Pneumáticos",
+        title: "AirLab - Bancada de Testes PneumÃ¡ticos",
         debugMode: "Modo Debug - AirLab",
         
         // Buttons
@@ -74,14 +90,14 @@ const translations = {
         reboot: "Reiniciar Raspberry Pi",
         
         // Navigation
-        backToMain: "Voltar à Vista Principal",
-        debugPage: "Página de Debug",
+        backToMain: "Voltar Ã  Vista Principal",
+        debugPage: "PÃ¡gina de Debug",
         
         // Channel labels
-        vacuum1: "Vácuo 1",
-        vacuum2: "Vácuo 2",
-        vacuum3: "Vácuo 3",
-        vacuum4: "Vácuo 4",
+        vacuum1: "VÃ¡cuo 1",
+        vacuum2: "VÃ¡cuo 2",
+        vacuum3: "VÃ¡cuo 3",
+        vacuum4: "VÃ¡cuo 4",
         
         // Status
         statusOk: "OK",
@@ -91,35 +107,51 @@ const translations = {
         // Debug info
         rawValue: "Valor Bruto:",
         offset: "Offset:",
-        instantPressure: "Pressão Instantânea:",
-        samplesInAvg: "Amostras na Média:",
+        instantPressure: "PressÃ£o InstantÃ¢nea:",
+        samplesInAvg: "Amostras na MÃ©dia:",
         
         // Info messages
-        debugInfo: "Informações de debug atualizadas a 2Hz",
-        lastUpdate: "Última atualização:",
+        debugInfo: "InformaÃ§Ãµes de debug atualizadas a 2Hz",
+        lastUpdate: "Ãšltima atualizaÃ§Ã£o:",
+        digitalInputsInfo: "Estado das Entradas Digitais - Atualiza a 2Hz",
+        signalsUpdateInfo: "Sinais digitais atualizam automaticamente a 2Hz",
+        signalsPage: "Sinais Digitais",
+        signalsTitle: "Sinais Digitais - AirLab",
+        
+        // Digital inputs
+        input1: "Entrada 1",
+        input2: "Entrada 2",
+        input3: "Entrada 3",
+        input4: "Entrada 4",
+        input5: "Entrada 5",
+        input6: "Entrada 6",
+        input7: "Entrada 7",
+        input8: "Entrada 8",
+        statusOn: "LIGADO",
+        statusOff: "DESLIGADO",
         
         // Calibration instructions
-        calibrationTitle: "Instruções de Calibração",
-        calibrationText: "Para calibrar: Exponha todas as ventosas à pressão atmosférica (sem vácuo), depois clique em \"Calibrar Todos os Canais\" na página principal para zerar as leituras.",
-        movingAverage: "Filtro de média móvel: 10 amostras para leituras estáveis",
+        calibrationTitle: "InstruÃ§Ãµes de CalibraÃ§Ã£o",
+        calibrationText: "Para calibrar: Exponha todas as ventosas Ã  pressÃ£o atmosfÃ©rica (sem vÃ¡cuo), depois clique em \"Calibrar Todos os Canais\" na pÃ¡gina principal para zerar as leituras.",
+        movingAverage: "Filtro de mÃ©dia mÃ³vel: 10 amostras para leituras estÃ¡veis",
         systemStatus: "Estado do sistema: Certifique-se que",
-        isRunning: "está em execução!",
+        isRunning: "estÃ¡ em execuÃ§Ã£o!",
         
         // Confirmation dialogs
-        shutdownConfirm: "Tem certeza que deseja desligar o Raspberry Pi?\n\nIsto irá desligar o sistema completamente.",
-        rebootConfirm: "Tem certeza que deseja reiniciar o Raspberry Pi?\n\nO sistema irá reiniciar e a conexão será temporariamente perdida.",
-        resetConfirm: "Resetar todos os offsets de calibração para zero?",
+        shutdownConfirm: "Tem certeza que deseja desligar o Raspberry Pi?\n\nIsto irÃ¡ desligar o sistema completamente.",
+        rebootConfirm: "Tem certeza que deseja reiniciar o Raspberry Pi?\n\nO sistema irÃ¡ reiniciar e a conexÃ£o serÃ¡ temporariamente perdida.",
+        resetConfirm: "Resetar todos os offsets de calibraÃ§Ã£o para zero?",
         
         // Success/Error messages
         calibrationSuccess: "Todos os canais calibrados para 0 mbar",
-        calibrationFailed: "Falha na calibração:",
-        resetSuccess: "Calibração resetada para valores de fábrica",
+        calibrationFailed: "Falha na calibraÃ§Ã£o:",
+        resetSuccess: "CalibraÃ§Ã£o resetada para valores de fÃ¡brica",
         resetFailed: "Falha ao resetar:",
-        shutdownSuccess: "Raspberry Pi está desligando...",
+        shutdownSuccess: "Raspberry Pi estÃ¡ desligando...",
         shutdownFailed: "Falha ao desligar:",
-        rebootSuccess: "Raspberry Pi está reiniciando...",
+        rebootSuccess: "Raspberry Pi estÃ¡ reiniciando...",
         rebootFailed: "Falha ao reiniciar:",
-        connectionError: "Erro de conexão:",
+        connectionError: "Erro de conexÃ£o:",
         readError: "Falha ao ler dados do mestre EtherCAT"
     }
 };

@@ -2,6 +2,10 @@
 
 All notable changes to AirLab will be documented in this file.
 
+## [v1.6.0] - 2025-11-17
+
+- **Digital Signals Monitoring Page** : This update adds real-time monitoring of the 8 digital inputs from the EP2316-003 card.
+
 ## [1.5.0] - 2025-11-03
 
 ### Changed

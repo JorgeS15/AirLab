@@ -1,6 +1,6 @@
 # AirLab - Pneumatic Test Bench System
 
-**Version: 1.5.0**
+**Version: 1.6.0**
 
 AirLab is a pneumatic test bench system for testing air valves and vacuum systems. Built on Raspberry Pi with Beckhoff modules via EtherCAT, it provides real-time monitoring and control of pneumatic components with automatic calibration.
 
@@ -25,6 +25,7 @@ Debug Page:      http://<your-pi-ip>:5000/debug
 ## Features
 
 - **Real-time Pressure Display** - 4-channel vacuum/pressure monitoring at 2 Hz
+- **Digital Signals monitoring page** - 8 digital inputs
 - **Unit Toggle** - Switch between mbar and bar with one click
 - **Automatic Calibration** - Zero all channels at atmospheric pressure
 - **Moving Average Filter** - 10-sample rolling average for stable readings

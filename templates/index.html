@@ -12,7 +12,7 @@
         <header>
             <h1>
                 <span class="status-indicator" id="statusIndicator"></span>
-                💨 <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
+                ðŸ’¨ <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
                 <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v1.5.0</span>
             </h1>
             <div class="language-selector">
@@ -82,9 +82,9 @@
 
         <div class="info-box">
             <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">🔍 <span data-i18n="debugPage">Debug Page</span></a>
+                <a href="/signals" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">📡 <span data-i18n="signalsPage">Digital Signals</span></a> | <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">ðŸ” <span data-i18n="debugPage">Debug Page</span></a>
                 <button class="btn btn-danger" onclick="shutdownRaspberry()" style="padding: 8px 16px; font-size: 0.9em;">
-                    🔴 <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
+                    ðŸ”´ <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
                 </button>
             </p>
         </div>
@@ -166,7 +166,7 @@
                             // Update vacuum indicator
                             const vacuumIndicator = document.getElementById(`vacuum-ch${i}`);
                             if (pressure < -50) {
-                                vacuumIndicator.textContent = '💨';
+                                vacuumIndicator.textContent = 'ðŸ’¨';
                                 vacuumIndicator.title = 'Vacuum active';
                             } else {
                                 vacuumIndicator.textContent = '';
@@ -231,7 +231,7 @@
         function showError(message) {
             const messageContainer = document.getElementById('messageContainer');
             messageContainer.innerHTML = 
-                `<div class="error-message">âš ï¸ ${message}</div>`;
+                `<div class="error-message">Ã¢Å¡Â Ã¯Â¸Â ${message}</div>`;
             setTimeout(() => {
                 messageContainer.innerHTML = '';
             }, 5000);
@@ -240,14 +240,14 @@
         function showSuccess(message) {
             const messageContainer = document.getElementById('messageContainer');
             messageContainer.innerHTML = 
-                `<div class="success-message">✅ ${message}</div>`;
+                `<div class="success-message">âœ… ${message}</div>`;
             setTimeout(() => {
                 messageContainer.innerHTML = '';
             }, 3000);
         }
 
         function shutdownRaspberry() {
-            if (confirm('⚠️ ' + t('shutdownConfirm'))) {
+            if (confirm('âš ï¸ ' + t('shutdownConfirm'))) {
                 fetch('/api/shutdown', { method: 'POST' })
                     .then(response => response.json())
                     .then(data => {
