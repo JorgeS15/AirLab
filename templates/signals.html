@@ -29,6 +29,21 @@
             box-shadow: 0 8px 15px rgba(102, 126, 234, 0.4);
         }
 
+        .output-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .output-card.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(245, 87, 108, 0.4);
+        }
+
         .signal-title {
             font-size: 1.2em;
             font-weight: bold;
@@ -36,7 +51,8 @@
             color: #333;
         }
 
-        .signal-card.active .signal-title {
+        .signal-card.active .signal-title,
+        .output-card.active .signal-title {
             color: white;
         }
 
@@ -63,6 +79,13 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
+        .output-card.active .signal-indicator {
+            background: white;
+            border-color: white;
+            color: #f5576c;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
         .signal-state {
             font-size: 1.1em;
             font-weight: bold;
@@ -73,9 +96,64 @@
             display: inline-block;
         }
 
-        .signal-card.active .signal-state {
+        .signal-card.active .signal-state,
+        .output-card.active .signal-state {
             background: rgba(255, 255, 255, 0.3);
             color: white;
+        }
+
+        .toggle-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: 2px solid #4b6cb7;
+            background: white;
+            color: #4b6cb7;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: #4b6cb7;
+            color: white;
+        }
+
+        .output-card.active .toggle-btn {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .output-card.active .toggle-btn:hover {
+            background: white;
+            color: #f5576c;
+        }
+
+        .section-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 30px 0 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: #333;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
         }
 
         .nav-links {
@@ -122,6 +200,10 @@
         </div>
 
         <div id="messageContainer"></div>
+
+        <div class="section-header">
+            <h2>📥 <span data-i18n="digitalInputs">Digital Inputs</span></h2>
+        </div>
 
         <div class="signals-grid">
             <div class="signal-card" id="signal-card-1">
@@ -173,6 +255,77 @@
             </div>
         </div>
 
+        <div class="section-header">
+            <h2>📤 <span data-i18n="digitalOutputs">Digital Outputs</span></h2>
+        </div>
+
+        <div class="control-buttons">
+            <button class="btn btn-secondary" id="allOffBtn">
+                🔴 <span data-i18n="allOff">All OFF</span>
+            </button>
+            <button class="btn btn-primary" id="allOnBtn">
+                🟢 <span data-i18n="allOn">All ON</span>
+            </button>
+        </div>
+
+        <div class="signals-grid">
+            <div class="output-card" id="output-card-1">
+                <div class="signal-title" data-i18n="output1">Output 1</div>
+                <div class="signal-indicator" id="out-indicator-1">0</div>
+                <div class="signal-state" id="out-state-1" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="1" data-i18n="toggle">Toggle</button>
+            </div>
+
+            <div class="output-card" id="output-card-2">
+                <div class="signal-title" data-i18n="output2">Output 2</div>
+                <div class="signal-indicator" id="out-indicator-2">0</div>
+                <div class="signal-state" id="out-state-2" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="2" data-i18n="toggle">Toggle</button>
+            </div>
+
+            <div class="output-card" id="output-card-3">
+                <div class="signal-title" data-i18n="output3">Output 3</div>
+                <div class="signal-indicator" id="out-indicator-3">0</div>
+                <div class="signal-state" id="out-state-3" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="3" data-i18n="toggle">Toggle</button>
+            </div>
+
+            <div class="output-card" id="output-card-4">
+                <div class="signal-title" data-i18n="output4">Output 4</div>
+                <div class="signal-indicator" id="out-indicator-4">0</div>
+                <div class="signal-state" id="out-state-4" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="4" data-i18n="toggle">Toggle</button>
+            </div>
+
+            <div class="output-card" id="output-card-5">
+                <div class="signal-title" data-i18n="output5">Output 5</div>
+                <div class="signal-indicator" id="out-indicator-5">0</div>
+                <div class="signal-state" id="out-state-5" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="5" data-i18n="toggle">Toggle</button>
+            </div>
+
+            <div class="output-card" id="output-card-6">
+                <div class="signal-title" data-i18n="output6">Output 6</div>
+                <div class="signal-indicator" id="out-indicator-6">0</div>
+                <div class="signal-state" id="out-state-6" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="6" data-i18n="toggle">Toggle</button>
+            </div>
+
+            <div class="output-card" id="output-card-7">
+                <div class="signal-title" data-i18n="output7">Output 7</div>
+                <div class="signal-indicator" id="out-indicator-7">0</div>
+                <div class="signal-state" id="out-state-7" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="7" data-i18n="toggle">Toggle</button>
+            </div>
+
+            <div class="output-card" id="output-card-8">
+                <div class="signal-title" data-i18n="output8">Output 8</div>
+                <div class="signal-indicator" id="out-indicator-8">0</div>
+                <div class="signal-state" id="out-state-8" data-i18n="statusOff">OFF</div>
+                <button class="toggle-btn" data-output="8" data-i18n="toggle">Toggle</button>
+            </div>
+        </div>
+
         <div class="info-box">
             <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
                 📊 <span data-i18n="signalsUpdateInfo">Digital signals update automatically at 2Hz</span> |
@@ -201,6 +354,7 @@
         }
 
         function updateSignals() {
+            // Update inputs
             fetch('/api/digital')
                 .then(response => response.json())
                 .then(data => {
@@ -242,6 +396,118 @@
                 .catch(error => {
                     showError((t('connectionError') || 'Connection error') + ': ' + error);
                 });
+
+            // Update outputs
+            fetch('/api/outputs')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update each output card
+                        for (let i = 1; i <= 8; i++) {
+                            const output = data.outputs[`output_${i}`];
+                            const card = document.getElementById(`output-card-${i}`);
+                            const indicator = document.getElementById(`out-indicator-${i}`);
+                            const state = document.getElementById(`out-state-${i}`);
+                            
+                            // Update indicator value
+                            indicator.textContent = output.value;
+                            
+                            // Update state text and card style
+                            if (output.value === 1) {
+                                card.classList.add('active');
+                                state.textContent = t('statusOn') || 'ON';
+                            } else {
+                                card.classList.remove('active');
+                                state.textContent = t('statusOff') || 'OFF';
+                            }
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating outputs:', error);
+                });
+        }
+
+        function toggleOutput(outputNum) {
+            console.log('Toggle output:', outputNum);
+            
+            // Get current state from the UI
+            const indicator = document.getElementById(`out-indicator-${outputNum}`);
+            const currentValue = parseInt(indicator.textContent);
+            const newValue = currentValue === 1 ? 0 : 1;
+            
+            console.log('Current value:', currentValue, 'New value:', newValue);
+            
+            // Set new state
+            setOutput(outputNum, newValue);
+        }
+
+        function setOutput(outputNum, value) {
+            console.log('Setting output', outputNum, 'to', value);
+            
+            fetch('/api/outputs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    output: outputNum,
+                    value: value
+                })
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.success) {
+                    console.log('Output set successfully');
+                    // Force immediate update
+                    setTimeout(updateSignals, 100);
+                } else {
+                    showError('Failed to set output: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error setting output:', error);
+                showError('Error setting output: ' + error);
+            });
+        }
+
+        function setAllOutputs(value) {
+            const outputs = Array(8).fill(value);
+            
+            fetch('/api/outputs/all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    outputs: outputs
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showSuccess(value === 1 ? 'All outputs turned ON' : 'All outputs turned OFF');
+                    updateSignals();
+                } else {
+                    showError('Failed to set all outputs: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showError('Error setting all outputs: ' + error);
+            });
+        }
+
+        function showSuccess(message) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = 
+                `<div class="success-message">✅ ${message}</div>`;
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 2000);
         }
 
         function showError(message) {
@@ -255,6 +521,29 @@
         
         // Initial load
         updateSignals();
+
+        // Add event listeners for all toggle buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle buttons for individual outputs
+            document.querySelectorAll('.toggle-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const outputNum = parseInt(this.getAttribute('data-output'));
+                    toggleOutput(outputNum);
+                });
+            });
+
+            // All ON button
+            document.getElementById('allOnBtn').addEventListener('click', function() {
+                setAllOutputs(1);
+            });
+
+            // All OFF button
+            document.getElementById('allOffBtn').addEventListener('click', function() {
+                setAllOutputs(0);
+            });
+
+            console.log('Event listeners attached successfully');
+        });
     </script>
 </body>
 </html>

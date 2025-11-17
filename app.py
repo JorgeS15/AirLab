@@ -172,6 +172,130 @@ def api_digital():
         'error': 'Failed to read data from /tmp/ethercat_digital.txt'
     })
 
+@app.route('/api/outputs', methods=['GET'])
+def api_outputs_get():
+    """Read current digital outputs state"""
+    try:
+        with open('/tmp/ethercat_outputs.txt', 'r') as f:
+            line = f.read().strip()
+            values_list = [int(x) for x in line.split(',')]
+            
+            if len(values_list) == 8:
+                result = {}
+                for i in range(8):
+                    result[f'output_{i+1}'] = {
+                        'value': values_list[i],
+                        'state': 'ON' if values_list[i] == 1 else 'OFF'
+                    }
+                
+                return jsonify({
+                    'success': True,
+                    'timestamp': datetime.now().isoformat(),
+                    'outputs': result
+                })
+    except Exception as e:
+        print(f"Error reading digital outputs: {e}")
+    
+    return jsonify({
+        'success': False,
+        'error': 'Failed to read outputs state'
+    })
+
+@app.route('/api/outputs', methods=['POST'])
+def api_outputs_set():
+    """Set digital outputs state"""
+    try:
+        data = request.get_json()
+        output_num = data.get('output')  # 1-8
+        value = data.get('value')  # 0 or 1
+        
+        if output_num is None or value is None:
+            return jsonify({
+                'success': False,
+                'error': 'Missing output or value parameter'
+            })
+        
+        output_num = int(output_num)
+        value = int(value)
+        
+        if output_num < 1 or output_num > 8:
+            return jsonify({
+                'success': False,
+                'error': 'Output must be between 1 and 8'
+            })
+        
+        if value not in [0, 1]:
+            return jsonify({
+                'success': False,
+                'error': 'Value must be 0 or 1'
+            })
+        
+        # Read current state
+        outputs = [0, 0, 0, 0, 0, 0, 0, 0]
+        try:
+            with open('/tmp/ethercat_outputs.txt', 'r') as f:
+                line = f.read().strip()
+                outputs = [int(x) for x in line.split(',')]
+        except:
+            pass
+        
+        # Update the specified output
+        outputs[output_num - 1] = value
+        
+        # Write back to file
+        with open('/tmp/ethercat_outputs.txt', 'w') as f:
+            f.write(','.join(map(str, outputs)) + '\n')
+        
+        return jsonify({
+            'success': True,
+            'message': f'Output {output_num} set to {value}',
+            'output': output_num,
+            'value': value
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
+
+@app.route('/api/outputs/all', methods=['POST'])
+def api_outputs_all():
+    """Set all digital outputs at once"""
+    try:
+        data = request.get_json()
+        outputs = data.get('outputs')  # Array of 8 values [0,1,0,1,...]
+        
+        if not outputs or len(outputs) != 8:
+            return jsonify({
+                'success': False,
+                'error': 'Must provide array of 8 output values'
+            })
+        
+        # Validate all values are 0 or 1
+        for val in outputs:
+            if val not in [0, 1]:
+                return jsonify({
+                    'success': False,
+                    'error': 'All values must be 0 or 1'
+                })
+        
+        # Write to file
+        with open('/tmp/ethercat_outputs.txt', 'w') as f:
+            f.write(','.join(map(str, outputs)) + '\n')
+        
+        return jsonify({
+            'success': True,
+            'message': 'All outputs updated',
+            'outputs': outputs
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
+
 @app.route('/api/calibrate', methods=['POST'])
 def api_calibrate():
     """
