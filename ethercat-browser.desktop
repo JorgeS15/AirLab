@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=EtherCAT Dashboard Browser
+Exec=/usr/bin/chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --check-for-update-interval=31536000 --disable-session-crashed-bubble --disable-features=TranslateUI --password-store=basic --use-mock-keychain http://localhost:5000
+X-GNOME-Autostart-enabled=true
