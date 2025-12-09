@@ -23,6 +23,19 @@ const translations = {
         vacuum2: "Vacuum 2",
         vacuum3: "Vacuum 3",
         vacuum4: "Vacuum 4",
+
+        // Circuit controls
+        circuitControls: "Circuit Controls",
+        circuit1: "Circuit 1",
+        circuit2: "Circuit 2",
+        circuit3: "Circuit 3",
+        circuit4: "Circuit 4",
+        mode: "Mode",
+        vacuum: "Vacuum",
+        compressedAir: "Compressed Air",
+        switchMode: "Switch Mode",
+        activate: "Activate",
+        deactivate: "Deactivate",
         
         // Digital inputs
         input1: "Input 1",
@@ -113,6 +126,19 @@ const translations = {
         vacuum2: "VÃ¡cuo 2",
         vacuum3: "VÃ¡cuo 3",
         vacuum4: "VÃ¡cuo 4",
+
+        // Circuit controls
+        circuitControls: "Controles de Circuito",
+        circuit1: "Circuito 1",
+        circuit2: "Circuito 2",
+        circuit3: "Circuito 3",
+        circuit4: "Circuito 4",
+        mode: "Modo",
+        vacuum: "VÃ¡cuo",
+        compressedAir: "Ar Comprimido",
+        switchMode: "Mudar Modo",
+        activate: "Ativar",
+        deactivate: "Desativar",
         
         // Status
         statusOk: "OK",

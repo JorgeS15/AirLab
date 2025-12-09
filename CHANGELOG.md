@@ -5,6 +5,44 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2025-12-09
+
+### ✨ Added
+- **Circuit Control Interface**: Added comprehensive circuit control panel to main page
+  - 4 independent circuits with individual controls
+  - Mode switching: Toggle between Vacuum and Compressed Air for each circuit
+  - Circuit activation: Individual activation buttons for each circuit
+- **Digital Output Integration**:
+  - DOs 1-4: Control circuit activation (ON/OFF)
+  - DOs 5-8: Control mode switching (Vacuum=0, Compressed Air=1)
+- **Real-Time Status Display**:
+  - Live visual indicators for mode (Blue=Vacuum, Orange=Compressed Air)
+  - Active state indicators (Green=Active, Gray=Inactive)
+  - Dynamic button labels (Activate/Deactivate)
+- **Bilingual Support**: Full English and Portuguese translations for circuit controls
+- **Auto-Refresh**: Circuit status updates automatically at 2Hz alongside pressure monitoring
+
+### 🔧 Changed
+- **Main Page Layout**: Added dedicated "Circuit Controls" section between vacuum monitoring and calibration panel
+- **CSS Enhancements**: New styling for circuit cards with hover effects and responsive design
+- **JavaScript Functions**:
+  - `toggleMode(circuitNum)`: Switch between vacuum/compressed air
+  - `toggleActivation(circuitNum)`: Activate/deactivate circuits
+  - `updateCircuitStatus()`: Auto-refresh circuit states from digital outputs
+
+### 📚 Documentation
+- Updated version numbers across all files (app.py, index.html)
+- Enhanced translation system with circuit-specific terminology
+
+### Technical Details
+- **API Endpoints Used**:
+  - GET `/api/outputs`: Read current digital output states
+  - POST `/api/outputs`: Set individual output states
+- **Grid Layout**: 2x2 responsive grid for circuit cards
+- **Mobile Support**: Responsive design adapts to single column on small screens
+
+---
+
 ## [2.0.2] - 2025-12-05
 
 ### 🎯 Major Update: Unified EtherCAT Control
