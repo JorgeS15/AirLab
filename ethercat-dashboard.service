@@ -1,0 +1,20 @@
+[Unit]
+Description=EtherCAT Web Dashboard
+After=network.target ethercat.service ethercat-app.service
+Requires=ethercat-app.service
+# Wait for ethercat_app to start writing data
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=automation
+WorkingDirectory=/home/automation/ethercat_dashboard
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+# Wait 1 second after ethercat-app starts
+ExecStartPre=/bin/sleep 1
+ExecStart=/usr/bin/python3 /home/automation/ethercat_dashboard/app.py
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

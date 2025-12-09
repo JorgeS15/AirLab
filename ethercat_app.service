@@ -1,0 +1,19 @@
+[Unit]
+Description=EtherCAT Application
+After=network.target ethercat.service
+Requires=ethercat.service
+# Wait for EtherCAT master to be fully ready
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/automation/ethercat_dashboard
+# Wait 7 second after ethercat.service starts
+ExecStartPre=/bin/sleep 7
+ExecStart=/home/automation/ethercat_dashboard/ethercat_app
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

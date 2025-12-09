@@ -33,6 +33,21 @@ const translations = {
         input6: "Input 6",
         input7: "Input 7",
         input8: "Input 8",
+        digitalInputs: "Digital Inputs",
+        
+        // Digital outputs
+        output1: "Output 1",
+        output2: "Output 2",
+        output3: "Output 3",
+        output4: "Output 4",
+        output5: "Output 5",
+        output6: "Output 6",
+        output7: "Output 7",
+        output8: "Output 8",
+        digitalOutputs: "Digital Outputs",
+        toggle: "Toggle",
+        allOn: "All ON",
+        allOff: "All OFF",
         
         // Status
         statusOk: "OK",
@@ -129,6 +144,21 @@ const translations = {
         input8: "Entrada 8",
         statusOn: "LIGADO",
         statusOff: "DESLIGADO",
+        digitalInputs: "Entradas Digitais",
+        
+        // Digital outputs
+        output1: "Saída 1",
+        output2: "Saída 2",
+        output3: "Saída 3",
+        output4: "Saída 4",
+        output5: "Saída 5",
+        output6: "Saída 6",
+        output7: "Saída 7",
+        output8: "Saída 8",
+        digitalOutputs: "Saídas Digitais",
+        toggle: "Alternar",
+        allOn: "Todas LIGADAS",
+        allOff: "Todas DESLIGADAS",
         
         // Calibration instructions
         calibrationTitle: "InstruÃ§Ãµes de CalibraÃ§Ã£o",
