@@ -5,6 +5,20 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2025-12-16
+
+### 🔧 Changed
+- **Mode Logic Inversion**: Updated digital output mapping for circuit modes
+  - Compressed Air is now the default mode (output = 0)
+  - Vacuum mode now uses output = 1
+  - Updated all circuit cards to display "Compressed Air" as default
+  - Pressure display now hidden by default (only visible in Vacuum mode)
+
+### 🐛 Fixed
+- **Portuguese Translation Encoding**: Fixed UTF-8 encoding issues in translations.js
+  - Corrected special characters: "Pneumáticos", "Vácuo", "Página", etc.
+  - Fixed all Portuguese text to display properly with accents and special characters
+
 ## [2.1.1] - 2025-12-16
 
 ### 🎨 Changed

@@ -30,14 +30,14 @@
                     <div class="circuit-title" data-i18n="circuit1">Circuit 1</div>
                     <button class="btn btn-mode" onclick="toggleMode(1)" data-i18n="switchMode">Switch Mode</button>
                 </div>
-                <div class="circuit-pressure" id="pressure-display-1" style="display: block;">
+                <div class="circuit-pressure" id="pressure-display-1" style="display: none;">
                     <span id="pressure-ch1">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch1"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-1">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
-                    <span class="mode-value" id="mode-value-1" data-i18n="vacuum">Vacuum</span>
+                    <span class="mode-value" id="mode-value-1" data-i18n="compressedAir">Compressed Air</span>
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-1" onclick="toggleActivation(1)">
@@ -52,14 +52,14 @@
                     <div class="circuit-title" data-i18n="circuit2">Circuit 2</div>
                     <button class="btn btn-mode" onclick="toggleMode(2)" data-i18n="switchMode">Switch Mode</button>
                 </div>
-                <div class="circuit-pressure" id="pressure-display-2" style="display: block;">
+                <div class="circuit-pressure" id="pressure-display-2" style="display: none;">
                     <span id="pressure-ch2">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch2"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-2">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
-                    <span class="mode-value" id="mode-value-2" data-i18n="vacuum">Vacuum</span>
+                    <span class="mode-value" id="mode-value-2" data-i18n="compressedAir">Compressed Air</span>
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-2" onclick="toggleActivation(2)">
@@ -74,14 +74,14 @@
                     <div class="circuit-title" data-i18n="circuit3">Circuit 3</div>
                     <button class="btn btn-mode" onclick="toggleMode(3)" data-i18n="switchMode">Switch Mode</button>
                 </div>
-                <div class="circuit-pressure" id="pressure-display-3" style="display: block;">
+                <div class="circuit-pressure" id="pressure-display-3" style="display: none;">
                     <span id="pressure-ch3">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch3"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-3">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
-                    <span class="mode-value" id="mode-value-3" data-i18n="vacuum">Vacuum</span>
+                    <span class="mode-value" id="mode-value-3" data-i18n="compressedAir">Compressed Air</span>
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-3" onclick="toggleActivation(3)">
@@ -96,14 +96,14 @@
                     <div class="circuit-title" data-i18n="circuit4">Circuit 4</div>
                     <button class="btn btn-mode" onclick="toggleMode(4)" data-i18n="switchMode">Switch Mode</button>
                 </div>
-                <div class="circuit-pressure" id="pressure-display-4" style="display: block;">
+                <div class="circuit-pressure" id="pressure-display-4" style="display: none;">
                     <span id="pressure-ch4">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch4"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-4">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
-                    <span class="mode-value" id="mode-value-4" data-i18n="vacuum">Vacuum</span>
+                    <span class="mode-value" id="mode-value-4" data-i18n="compressedAir">Compressed Air</span>
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-4" onclick="toggleActivation(4)">
@@ -400,8 +400,8 @@
                             const pressureDisplay = document.getElementById(`pressure-display-${i}`);
 
                             if (modeValueElement) {
-                                if (modeState === 0) {
-                                    // Vacuum mode
+                                if (modeState === 1) {
+                                    // Vacuum mode (output 1)
                                     const vacuumText = translations[currentLang]?.vacuum || 'Vacuum';
                                     modeValueElement.textContent = vacuumText;
                                     modeValueElement.setAttribute('data-i18n', 'vacuum');
@@ -410,7 +410,7 @@
                                         pressureDisplay.style.display = 'block';
                                     }
                                 } else {
-                                    // Compressed air mode
+                                    // Compressed air mode (output 0, default)
                                     const airText = translations[currentLang]?.compressedAir || 'Compressed Air';
                                     modeValueElement.textContent = airText;
                                     modeValueElement.setAttribute('data-i18n', 'compressedAir');
