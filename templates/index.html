@@ -372,6 +372,7 @@
             fetch('/api/outputs')
                 .then(response => response.json())
                 .then(data => {
+                    console.log('updateCircuitStatus - API response:', data);
                     if (data.success) {
                         // Update all 4 circuits
                         for (let i = 1; i <= 4; i++) {
@@ -380,6 +381,8 @@
                             // Get mode state (DOs 5-8)
                             const modeState = data.outputs[i + 3]; // Index 4-7 for DOs 5-8
 
+                            console.log(`Circuit ${i}: activation=${activationState}, mode=${modeState}`);
+
                             // Update mode display
                             const modeValueElement = document.getElementById(`mode-value-${i}`);
                             const pressureDisplay = document.getElementById(`pressure-display-${i}`);
@@ -387,20 +390,24 @@
                             if (modeValueElement) {
                                 if (modeState === 0) {
                                     // Vacuum mode
-                                    modeValueElement.textContent = translations[currentLang].vacuum;
+                                    const vacuumText = translations[currentLang]?.vacuum || 'Vacuum';
+                                    modeValueElement.textContent = vacuumText;
                                     modeValueElement.setAttribute('data-i18n', 'vacuum');
                                     // Show pressure display in vacuum mode
                                     if (pressureDisplay) {
                                         pressureDisplay.style.display = 'block';
                                     }
+                                    console.log(`Circuit ${i} mode set to: ${vacuumText}`);
                                 } else {
                                     // Compressed air mode
-                                    modeValueElement.textContent = translations[currentLang].compressedAir;
+                                    const airText = translations[currentLang]?.compressedAir || 'Compressed Air';
+                                    modeValueElement.textContent = airText;
                                     modeValueElement.setAttribute('data-i18n', 'compressedAir');
                                     // Hide pressure display in compressed air mode
                                     if (pressureDisplay) {
                                         pressureDisplay.style.display = 'none';
                                     }
+                                    console.log(`Circuit ${i} mode set to: ${airText}`);
                                 }
                             }
 
@@ -410,13 +417,17 @@
                                 const btnSpan = activateBtn.querySelector('span');
                                 if (btnSpan) {
                                     if (activationState === 1) {
-                                        btnSpan.textContent = translations[currentLang].deactivate;
+                                        const deactivateText = translations[currentLang]?.deactivate || 'Deactivate';
+                                        btnSpan.textContent = deactivateText;
                                         btnSpan.setAttribute('data-i18n', 'deactivate');
                                         activateBtn.classList.add('active');
+                                        console.log(`Circuit ${i} button set to: ${deactivateText}, class: active`);
                                     } else {
-                                        btnSpan.textContent = translations[currentLang].activate;
+                                        const activateText = translations[currentLang]?.activate || 'Activate';
+                                        btnSpan.textContent = activateText;
                                         btnSpan.setAttribute('data-i18n', 'activate');
                                         activateBtn.classList.remove('active');
+                                        console.log(`Circuit ${i} button set to: ${activateText}, class: inactive`);
                                     }
                                 }
                             }
