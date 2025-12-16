@@ -23,11 +23,6 @@
 
         <div id="messageContainer"></div>
 
-        <!-- Circuit Controls Section -->
-        <div class="section-header">
-            <h2>⚡ <span data-i18n="circuitControls">Circuit Controls</span></h2>
-        </div>
-
         <div class="circuits-grid">
             <!-- Circuit 1 -->
             <div class="circuit-card">
@@ -199,8 +194,11 @@
                             const pressure = ch.pressure_mbar;
                             const displayValue = convertToDisplayValue(pressure);
                             const unit = getCurrentUnit();
-                            
-                            document.getElementById(`pressure-ch${i}`).textContent = displayValue;
+
+                            const pressureElement = document.getElementById(`pressure-ch${i}`);
+                            if (pressureElement) {
+                                pressureElement.textContent = displayValue;
+                            }
                             
                             // Update unit display
                             const unitSpans = document.querySelectorAll('.channel-unit');
@@ -210,19 +208,14 @@
                             
                             // Update vacuum indicator
                             const vacuumIndicator = document.getElementById(`vacuum-ch${i}`);
-                            if (pressure < -50) {
-                                vacuumIndicator.textContent = 'ðŸ’¨';
-                                vacuumIndicator.title = 'Vacuum active';
-                            } else {
-                                vacuumIndicator.textContent = '';
+                            if (vacuumIndicator) {
+                                if (pressure < -50) {
+                                    vacuumIndicator.textContent = 'ðŸ'¨';
+                                    vacuumIndicator.title = 'Vacuum active';
+                                } else {
+                                    vacuumIndicator.textContent = '';
+                                }
                             }
-                            
-                            // Update status badge
-                            const statusBadge = document.getElementById(`status-ch${i}`);
-                            statusBadge.textContent = ch.status;
-                            statusBadge.className = 'status-badge ' + 
-                                (ch.status === 'OK' ? 'status-ok' : 
-                                 ch.status === 'ERROR' ? 'status-error' : 'status-warning');
                         }
                         
                         // Clear any error messages
