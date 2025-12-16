@@ -416,6 +416,8 @@ h1 {
     color: white;
     flex: 1;
     min-width: 120px;
+    padding: 8px 16px;
+    font-size: 0.9em;
 }
 
 .btn-mode:hover {
