@@ -364,6 +364,26 @@ h1 {
     color: #333;
 }
 
+.circuit-pressure {
+    font-size: 2em;
+    font-weight: bold;
+    color: #4b6cb7;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.circuit-pressure .channel-unit {
+    font-size: 0.4em;
+    color: #666;
+    margin-left: 5px;
+}
+
+.circuit-pressure .vacuum-indicator {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 0.6em;
+}
+
 .circuit-mode {
     font-size: 1em;
     color: #666;
@@ -388,7 +408,6 @@ h1 {
 .circuit-controls {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
     flex-wrap: wrap;
 }
 
@@ -407,8 +426,8 @@ h1 {
 .btn-activate {
     background: #28a745;
     color: white;
-    flex: 1;
-    min-width: 120px;
+    padding: 8px 16px;
+    font-size: 0.9em;
 }
 
 .btn-activate:hover {
@@ -422,17 +441,4 @@ h1 {
 
 .btn-activate.active:hover {
     background: #c82333;
-}
-
-.circuit-status {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 10px;
-    border-top: 1px solid #eee;
-}
-
-.status-indicator {
-    font-size: 1.5em;
-    transition: color 0.3s;
 }

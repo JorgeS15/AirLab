@@ -23,56 +23,6 @@
 
         <div id="messageContainer"></div>
 
-        <div class="channels-grid">
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum1">Vacuum 1</div>
-                    <span class="status-badge status-ok" id="status-ch1">OK</span>
-                </div>
-                <div class="channel-value pressure-value">
-                    <span id="pressure-ch1">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch1"></span>
-                </div>
-            </div>
-
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum2">Vacuum 2</div>
-                    <span class="status-badge status-ok" id="status-ch2">OK</span>
-                </div>
-                <div class="channel-value pressure-value">
-                    <span id="pressure-ch2">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch2"></span>
-                </div>
-            </div>
-
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum3">Vacuum 3</div>
-                    <span class="status-badge status-ok" id="status-ch3">OK</span>
-                </div>
-                <div class="channel-value pressure-value">
-                    <span id="pressure-ch3">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch3"></span>
-                </div>
-            </div>
-
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum4">Vacuum 4</div>
-                    <span class="status-badge status-ok" id="status-ch4">OK</span>
-                </div>
-                <div class="channel-value pressure-value">
-                    <span id="pressure-ch4">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch4"></span>
-                </div>
-            </div>
-        </div>
-
         <!-- Circuit Controls Section -->
         <div class="section-header">
             <h2>⚡ <span data-i18n="circuitControls">Circuit Controls</span></h2>
@@ -83,6 +33,14 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit1">Circuit 1</div>
+                    <button class="btn btn-activate" id="activate-btn-1" onclick="toggleActivation(1)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
+                <div class="circuit-pressure" id="pressure-display-1" style="display: block;">
+                    <span id="pressure-ch1">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch1"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-1">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
@@ -90,13 +48,6 @@
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-mode" onclick="toggleMode(1)" data-i18n="switchMode">Switch Mode</button>
-                    <button class="btn btn-activate" id="activate-btn-1" onclick="toggleActivation(1)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
-                </div>
-                <div class="circuit-status">
-                    <span class="status-indicator" id="status-mode-1">●</span>
-                    <span class="status-indicator" id="status-activate-1">●</span>
                 </div>
             </div>
 
@@ -104,6 +55,14 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit2">Circuit 2</div>
+                    <button class="btn btn-activate" id="activate-btn-2" onclick="toggleActivation(2)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
+                <div class="circuit-pressure" id="pressure-display-2" style="display: block;">
+                    <span id="pressure-ch2">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch2"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-2">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
@@ -111,13 +70,6 @@
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-mode" onclick="toggleMode(2)" data-i18n="switchMode">Switch Mode</button>
-                    <button class="btn btn-activate" id="activate-btn-2" onclick="toggleActivation(2)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
-                </div>
-                <div class="circuit-status">
-                    <span class="status-indicator" id="status-mode-2">●</span>
-                    <span class="status-indicator" id="status-activate-2">●</span>
                 </div>
             </div>
 
@@ -125,6 +77,14 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit3">Circuit 3</div>
+                    <button class="btn btn-activate" id="activate-btn-3" onclick="toggleActivation(3)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
+                <div class="circuit-pressure" id="pressure-display-3" style="display: block;">
+                    <span id="pressure-ch3">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch3"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-3">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
@@ -132,13 +92,6 @@
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-mode" onclick="toggleMode(3)" data-i18n="switchMode">Switch Mode</button>
-                    <button class="btn btn-activate" id="activate-btn-3" onclick="toggleActivation(3)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
-                </div>
-                <div class="circuit-status">
-                    <span class="status-indicator" id="status-mode-3">●</span>
-                    <span class="status-indicator" id="status-activate-3">●</span>
                 </div>
             </div>
 
@@ -146,6 +99,14 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit4">Circuit 4</div>
+                    <button class="btn btn-activate" id="activate-btn-4" onclick="toggleActivation(4)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
+                <div class="circuit-pressure" id="pressure-display-4" style="display: block;">
+                    <span id="pressure-ch4">---</span>
+                    <span class="channel-unit">mbar</span>
+                    <span class="vacuum-indicator" id="vacuum-ch4"></span>
                 </div>
                 <div class="circuit-mode" id="mode-display-4">
                     <span class="mode-label" data-i18n="mode">Mode</span>:
@@ -153,13 +114,6 @@
                 </div>
                 <div class="circuit-controls">
                     <button class="btn btn-mode" onclick="toggleMode(4)" data-i18n="switchMode">Switch Mode</button>
-                    <button class="btn btn-activate" id="activate-btn-4" onclick="toggleActivation(4)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
-                </div>
-                <div class="circuit-status">
-                    <span class="status-indicator" id="status-mode-4">●</span>
-                    <span class="status-indicator" id="status-activate-4">●</span>
                 </div>
             </div>
         </div>
@@ -435,30 +389,37 @@
 
                             // Update mode display
                             const modeValueElement = document.getElementById(`mode-value-${i}`);
-                            const modeIndicator = document.getElementById(`status-mode-${i}`);
+                            const pressureDisplay = document.getElementById(`pressure-display-${i}`);
 
                             if (modeState === 0) {
-                                modeValueElement.textContent = t('vacuum');
+                                // Vacuum mode
+                                modeValueElement.textContent = translations[currentLang].vacuum;
                                 modeValueElement.setAttribute('data-i18n', 'vacuum');
-                                modeIndicator.style.color = '#4b6cb7'; // Blue for vacuum
+                                // Show pressure display in vacuum mode
+                                if (pressureDisplay) {
+                                    pressureDisplay.style.display = 'block';
+                                }
                             } else {
-                                modeValueElement.textContent = t('compressedAir');
+                                // Compressed air mode
+                                modeValueElement.textContent = translations[currentLang].compressedAir;
                                 modeValueElement.setAttribute('data-i18n', 'compressedAir');
-                                modeIndicator.style.color = '#ffa500'; // Orange for compressed air
+                                // Hide pressure display in compressed air mode
+                                if (pressureDisplay) {
+                                    pressureDisplay.style.display = 'none';
+                                }
                             }
 
-                            // Update activation display
+                            // Update activation button
                             const activateBtn = document.getElementById(`activate-btn-${i}`);
-                            const activateIndicator = document.getElementById(`status-activate-${i}`);
 
                             if (activationState === 1) {
-                                activateBtn.innerHTML = '<span data-i18n="deactivate">' + t('deactivate') + '</span>';
+                                activateBtn.querySelector('span').textContent = translations[currentLang].deactivate;
+                                activateBtn.querySelector('span').setAttribute('data-i18n', 'deactivate');
                                 activateBtn.classList.add('active');
-                                activateIndicator.style.color = '#28a745'; // Green for active
                             } else {
-                                activateBtn.innerHTML = '<span data-i18n="activate">' + t('activate') + '</span>';
+                                activateBtn.querySelector('span').textContent = translations[currentLang].activate;
+                                activateBtn.querySelector('span').setAttribute('data-i18n', 'activate');
                                 activateBtn.classList.remove('active');
-                                activateIndicator.style.color = '#666'; // Gray for inactive
                             }
                         }
                     }
