@@ -407,17 +407,16 @@ h1 {
 
 .circuit-controls {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 .btn-mode {
     background: #6c757d;
     color: white;
-    flex: 1;
-    min-width: 120px;
     padding: 8px 16px;
     font-size: 0.9em;
+    border-radius: 5px;
 }
 
 .btn-mode:hover {
@@ -428,9 +427,11 @@ h1 {
 .btn-activate {
     background: #28a745;
     color: white;
-    padding: 12px 24px;
-    font-size: 1.1em;
+    padding: 15px 40px;
+    font-size: 1.2em;
     font-weight: bold;
+    width: 100%;
+    max-width: 300px;
 }
 
 .btn-activate:hover {

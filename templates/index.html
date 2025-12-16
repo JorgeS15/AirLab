@@ -28,9 +28,7 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit1">Circuit 1</div>
-                    <button class="btn btn-activate" id="activate-btn-1" onclick="toggleActivation(1)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
+                    <button class="btn btn-mode" onclick="toggleMode(1)" data-i18n="switchMode">Switch Mode</button>
                 </div>
                 <div class="circuit-pressure" id="pressure-display-1" style="display: block;">
                     <span id="pressure-ch1">---</span>
@@ -42,7 +40,9 @@
                     <span class="mode-value" id="mode-value-1" data-i18n="vacuum">Vacuum</span>
                 </div>
                 <div class="circuit-controls">
-                    <button class="btn btn-mode" onclick="toggleMode(1)" data-i18n="switchMode">Switch Mode</button>
+                    <button class="btn btn-activate" id="activate-btn-1" onclick="toggleActivation(1)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
                 </div>
             </div>
 
@@ -50,9 +50,7 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit2">Circuit 2</div>
-                    <button class="btn btn-activate" id="activate-btn-2" onclick="toggleActivation(2)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
+                    <button class="btn btn-mode" onclick="toggleMode(2)" data-i18n="switchMode">Switch Mode</button>
                 </div>
                 <div class="circuit-pressure" id="pressure-display-2" style="display: block;">
                     <span id="pressure-ch2">---</span>
@@ -64,7 +62,9 @@
                     <span class="mode-value" id="mode-value-2" data-i18n="vacuum">Vacuum</span>
                 </div>
                 <div class="circuit-controls">
-                    <button class="btn btn-mode" onclick="toggleMode(2)" data-i18n="switchMode">Switch Mode</button>
+                    <button class="btn btn-activate" id="activate-btn-2" onclick="toggleActivation(2)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
                 </div>
             </div>
 
@@ -72,9 +72,7 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit3">Circuit 3</div>
-                    <button class="btn btn-activate" id="activate-btn-3" onclick="toggleActivation(3)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
+                    <button class="btn btn-mode" onclick="toggleMode(3)" data-i18n="switchMode">Switch Mode</button>
                 </div>
                 <div class="circuit-pressure" id="pressure-display-3" style="display: block;">
                     <span id="pressure-ch3">---</span>
@@ -86,7 +84,9 @@
                     <span class="mode-value" id="mode-value-3" data-i18n="vacuum">Vacuum</span>
                 </div>
                 <div class="circuit-controls">
-                    <button class="btn btn-mode" onclick="toggleMode(3)" data-i18n="switchMode">Switch Mode</button>
+                    <button class="btn btn-activate" id="activate-btn-3" onclick="toggleActivation(3)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
                 </div>
             </div>
 
@@ -94,9 +94,7 @@
             <div class="circuit-card">
                 <div class="circuit-header">
                     <div class="circuit-title" data-i18n="circuit4">Circuit 4</div>
-                    <button class="btn btn-activate" id="activate-btn-4" onclick="toggleActivation(4)">
-                        <span data-i18n="activate">Activate</span>
-                    </button>
+                    <button class="btn btn-mode" onclick="toggleMode(4)" data-i18n="switchMode">Switch Mode</button>
                 </div>
                 <div class="circuit-pressure" id="pressure-display-4" style="display: block;">
                     <span id="pressure-ch4">---</span>
@@ -108,7 +106,9 @@
                     <span class="mode-value" id="mode-value-4" data-i18n="vacuum">Vacuum</span>
                 </div>
                 <div class="circuit-controls">
-                    <button class="btn btn-mode" onclick="toggleMode(4)" data-i18n="switchMode">Switch Mode</button>
+                    <button class="btn btn-activate" id="activate-btn-4" onclick="toggleActivation(4)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -374,11 +374,6 @@
             fetch('/api/outputs')
                 .then(response => response.json())
                 .then(data => {
-                    console.log('updateCircuitStatus - API response:', data);
-                    console.log('outputs type:', typeof data.outputs);
-                    console.log('outputs keys:', Object.keys(data.outputs));
-                    console.log('outputs content:', data.outputs);
-
                     if (data.success) {
                         // Convert outputs object to array if needed
                         let outputsArray;
@@ -393,16 +388,12 @@
                             }
                         }
 
-                        console.log('outputsArray:', outputsArray);
-
                         // Update all 4 circuits
                         for (let i = 1; i <= 4; i++) {
                             // Get activation state (DOs 1-4)
                             const activationState = outputsArray[i - 1];
                             // Get mode state (DOs 5-8)
                             const modeState = outputsArray[i + 3]; // Index 4-7 for DOs 5-8
-
-                            console.log(`Circuit ${i}: activation=${activationState}, mode=${modeState}`);
 
                             // Update mode display
                             const modeValueElement = document.getElementById(`mode-value-${i}`);
@@ -418,7 +409,6 @@
                                     if (pressureDisplay) {
                                         pressureDisplay.style.display = 'block';
                                     }
-                                    console.log(`Circuit ${i} mode set to: ${vacuumText}`);
                                 } else {
                                     // Compressed air mode
                                     const airText = translations[currentLang]?.compressedAir || 'Compressed Air';
@@ -428,7 +418,6 @@
                                     if (pressureDisplay) {
                                         pressureDisplay.style.display = 'none';
                                     }
-                                    console.log(`Circuit ${i} mode set to: ${airText}`);
                                 }
                             }
 
@@ -442,13 +431,11 @@
                                         btnSpan.textContent = deactivateText;
                                         btnSpan.setAttribute('data-i18n', 'deactivate');
                                         activateBtn.classList.add('active');
-                                        console.log(`Circuit ${i} button set to: ${deactivateText}, class: active`);
                                     } else {
                                         const activateText = translations[currentLang]?.activate || 'Activate';
                                         btnSpan.textContent = activateText;
                                         btnSpan.setAttribute('data-i18n', 'activate');
                                         activateBtn.classList.remove('active');
-                                        console.log(`Circuit ${i} button set to: ${activateText}, class: inactive`);
                                     }
                                 }
                             }

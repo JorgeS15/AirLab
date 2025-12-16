@@ -5,6 +5,20 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2025-12-16
+
+### 🎨 Changed
+- **Circuit Card Layout**: Improved UI organization
+  - Moved "Switch Mode" button to header (next to circuit title) for cleaner layout
+  - Moved "Activate/Deactivate" button to bottom of card (centered, larger) for better visibility
+  - Increased activate button size for better accessibility (bigger padding, 1.2em font)
+  - Reduced switch mode button size for better visual hierarchy (smaller padding, 0.9em font)
+- **Code Cleanup**: Removed all debug console.log statements for cleaner console output
+
+### 🐛 Fixed
+- Fixed CSS styling for new button positions and sizes
+- Improved button visual hierarchy and user experience
+
 ## [2.1.0] - 2025-12-09
 
 ### ✨ Added
