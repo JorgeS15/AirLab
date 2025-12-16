@@ -313,7 +313,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        const currentMode = data.outputs[modeOutput - 1]; // Array is 0-indexed
+                        const outputKey = 'output_' + modeOutput;
+                        const currentMode = data.outputs[outputKey]?.value ?? data.outputs[outputKey] ?? 0;
                         const newMode = currentMode === 1 ? 0 : 1;
 
                         // Set the new mode
@@ -331,7 +332,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        const currentActivation = data.outputs[circuitNum - 1]; // Array is 0-indexed
+                        const outputKey = 'output_' + circuitNum;
+                        const currentActivation = data.outputs[outputKey]?.value ?? data.outputs[outputKey] ?? 0;
                         const newActivation = currentActivation === 1 ? 0 : 1;
 
                         // Set the new activation state
@@ -383,10 +385,11 @@
                         if (Array.isArray(data.outputs)) {
                             outputsArray = data.outputs;
                         } else {
-                            // If it's an object with numbered keys (1-8), convert to array
+                            // If it's an object with string keys ('output_1', 'output_2', etc.), convert to array
                             outputsArray = [];
                             for (let i = 1; i <= 8; i++) {
-                                outputsArray[i - 1] = data.outputs[i] || data.outputs[String(i)] || 0;
+                                const outputKey = 'output_' + i;
+                                outputsArray[i - 1] = data.outputs[outputKey]?.value ?? data.outputs[outputKey] ?? 0;
                             }
                         }
 
