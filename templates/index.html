@@ -373,13 +373,31 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('updateCircuitStatus - API response:', data);
+                    console.log('outputs type:', typeof data.outputs);
+                    console.log('outputs keys:', Object.keys(data.outputs));
+                    console.log('outputs content:', data.outputs);
+
                     if (data.success) {
+                        // Convert outputs object to array if needed
+                        let outputsArray;
+                        if (Array.isArray(data.outputs)) {
+                            outputsArray = data.outputs;
+                        } else {
+                            // If it's an object with numbered keys (1-8), convert to array
+                            outputsArray = [];
+                            for (let i = 1; i <= 8; i++) {
+                                outputsArray[i - 1] = data.outputs[i] || data.outputs[String(i)] || 0;
+                            }
+                        }
+
+                        console.log('outputsArray:', outputsArray);
+
                         // Update all 4 circuits
                         for (let i = 1; i <= 4; i++) {
                             // Get activation state (DOs 1-4)
-                            const activationState = data.outputs[i - 1];
+                            const activationState = outputsArray[i - 1];
                             // Get mode state (DOs 5-8)
-                            const modeState = data.outputs[i + 3]; // Index 4-7 for DOs 5-8
+                            const modeState = outputsArray[i + 3]; // Index 4-7 for DOs 5-8
 
                             console.log(`Circuit ${i}: activation=${activationState}, mode=${modeState}`);
 
