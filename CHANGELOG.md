@@ -5,6 +5,37 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.4] - 2025-12-16
+
+### 🎯 HMI Optimization
+- **Optimized for 7-inch 800x480 Touchscreen Display**
+  - Reduced padding and margins throughout the interface for better space utilization
+  - Removed unnecessary whitespace in circuit cards
+  - Eliminated scrolling - everything now fits on screen
+  - Removed hover effects (not needed for touch interface)
+
+### 🔤 Enhanced Visibility
+- **Increased Font Sizes for Touch Interface**
+  - Circuit titles: 1.3em → 1.6em (23% larger)
+  - Pressure display: 2em → 2.8em (40% larger)
+  - Mode text: 1em → 1.3em (30% larger)
+  - Activate button: 1.2em → 1.4em (17% larger)
+  - Switch Mode button: 0.9em → 1.1em (22% larger)
+
+### 🎨 Layout Improvements
+- **Moved Language Selector to Bottom Bar**
+  - Relocated EN/PT buttons from header to bottom navigation bar
+  - Freed up header space for better title visibility
+  - Consolidated all controls in single bottom row
+
+### 📏 Spacing Optimization
+- **Reduced Padding Throughout**
+  - Body padding: 20px → 10px
+  - Header padding: 20px → 10px 15px
+  - Circuit card padding: 20px → 12px
+  - Grid gaps: 20px → 10px
+  - Margin reductions: 15-20px → 8-10px
+
 ## [2.1.3] - 2025-12-16
 
 ### 🎨 Changed
