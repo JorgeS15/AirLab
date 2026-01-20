@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Activate button: 2.6em → 1.8em
 - **Cleaner Interface**: Less clutter, more focus on essential information
 
+### 🐛 Bug Fixes
+- **Version Display**: Updated version to 2.1.8 in index.html header
+- **Message Positioning**: Moved error/success messages to bottom of page (below all controls)
+
 ## [2.1.7] - 2025-12-16
 
 ### 🎯 Conditional Pressure Display
