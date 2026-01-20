@@ -5,6 +5,17 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.8] - 2025-12-16
+
+### 🎨 UI Refinements and Simplification
+- **Blue Mode Button**: Changed mode button from grey to blue (#4b6cb7) for better visual hierarchy
+- **Simplified Mode Display**: Removed "Mode:" label - now shows only active mode (e.g., "Compressed Air" or "Vacuum | 123 mbar")
+- **Reduced Font Sizes**: Adjusted font sizes for better balance on 800x480 touchscreen
+  - Circuit titles: 3.2em → 2.2em
+  - Mode button: 2.6em → 1.8em
+  - Activate button: 2.6em → 1.8em
+- **Cleaner Interface**: Less clutter, more focus on essential information
+
 ## [2.1.7] - 2025-12-16
 
 ### 🎯 Conditional Pressure Display
