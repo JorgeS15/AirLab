@@ -5,6 +5,37 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.6] - 2025-12-16
+
+### 🎯 Complete HMI Redesign
+- **Centered All Content**: All text and buttons now centered in circuit cards for cleaner, professional HMI appearance
+- **Always Visible Pressure**: Pressure display now always visible (merged into mode button)
+- **Option A Layout**: `Mode: Compressed Air | 123 mbar` - all information in one line
+
+### 🔤 Even BIGGER Text for Better Readability
+- **Massive font size increases for touchscreen visibility**
+  - Circuit titles: 2.2em → 2.4em (centered)
+  - Mode + Pressure button: 1.5em → 1.9em (27% larger for easy reading of values)
+  - Activate button: 1.8em → 2em (11% larger)
+  - Activate button font-weight: bold → 900 (ultra-bold)
+  - Bottom bar buttons: 0.9em → 1.1em (22% larger)
+  - Bottom bar links: Added 1.1em font size
+
+### 🎨 UI Polish and Refinements
+- **Visual Separators**: Added subtle blue borders around circuit cards for better separation
+- **More Compact Header**: Reduced padding (10px → 8px) for more screen space
+- **Touch-Friendly Bottom Bar**:
+  - All buttons now min-height: 44px (Apple's recommended touch target)
+  - Increased padding: 8px 16px → 12px 20px
+  - Bigger gap between elements: 10px → 12px
+- **Bolder Activate Button**: font-weight: 900 with letter-spacing for maximum impact
+
+### 📐 Simplified Layout
+- **Removed separate header sections** - circuit title stands alone (centered)
+- **Removed conditional pressure display** - always visible for consistency
+- **Full-width activate button** - removed max-width constraint
+- **Cleaner card structure**: Title → Mode/Pressure → Activate (all centered)
+
 ## [2.1.5] - 2025-12-16
 
 ### 🔤 Even Larger Text for HMI

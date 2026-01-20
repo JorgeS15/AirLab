@@ -13,7 +13,7 @@
             <h1 style="text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px; position: relative;">
                 <span class="status-indicator" id="statusIndicator"></span>
                 <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
-                <span style="font-size: 0.5em; color: #999;">v2.1.5</span>
+                <span style="font-size: 0.5em; color: #999;">v2.1.6</span>
                 <span style="position: absolute; right: 0; display: flex; gap: 5px;">
                     <button class="lang-btn" data-lang="en" onclick="setLanguage('en')" style="padding: 6px 12px; font-size: 0.5em;">EN</button>
                     <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')" style="padding: 6px 12px; font-size: 0.5em;">PT</button>
@@ -26,16 +26,9 @@
         <div class="circuits-grid">
             <!-- Circuit 1 -->
             <div class="circuit-card">
-                <div class="circuit-header">
-                    <div class="circuit-title" data-i18n="circuit1">Circuit 1</div>
-                </div>
-                <div class="circuit-pressure" id="pressure-display-1" style="display: none;">
-                    <span id="pressure-ch1">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch1"></span>
-                </div>
+                <div class="circuit-title" data-i18n="circuit1">Circuit 1</div>
                 <button class="btn btn-mode-toggle" id="mode-display-1" onclick="toggleMode(1)">
-                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-1" data-i18n="compressedAir">Compressed Air</span>
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-1" data-i18n="compressedAir">Compressed Air</span> | <span id="pressure-ch1">---</span> <span class="mode-unit">mbar</span>
                 </button>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-1" onclick="toggleActivation(1)">
@@ -46,16 +39,9 @@
 
             <!-- Circuit 2 -->
             <div class="circuit-card">
-                <div class="circuit-header">
-                    <div class="circuit-title" data-i18n="circuit2">Circuit 2</div>
-                </div>
-                <div class="circuit-pressure" id="pressure-display-2" style="display: none;">
-                    <span id="pressure-ch2">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch2"></span>
-                </div>
+                <div class="circuit-title" data-i18n="circuit2">Circuit 2</div>
                 <button class="btn btn-mode-toggle" id="mode-display-2" onclick="toggleMode(2)">
-                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-2" data-i18n="compressedAir">Compressed Air</span>
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-2" data-i18n="compressedAir">Compressed Air</span> | <span id="pressure-ch2">---</span> <span class="mode-unit">mbar</span>
                 </button>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-2" onclick="toggleActivation(2)">
@@ -66,16 +52,9 @@
 
             <!-- Circuit 3 -->
             <div class="circuit-card">
-                <div class="circuit-header">
-                    <div class="circuit-title" data-i18n="circuit3">Circuit 3</div>
-                </div>
-                <div class="circuit-pressure" id="pressure-display-3" style="display: none;">
-                    <span id="pressure-ch3">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch3"></span>
-                </div>
+                <div class="circuit-title" data-i18n="circuit3">Circuit 3</div>
                 <button class="btn btn-mode-toggle" id="mode-display-3" onclick="toggleMode(3)">
-                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-3" data-i18n="compressedAir">Compressed Air</span>
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-3" data-i18n="compressedAir">Compressed Air</span> | <span id="pressure-ch3">---</span> <span class="mode-unit">mbar</span>
                 </button>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-3" onclick="toggleActivation(3)">
@@ -86,16 +65,9 @@
 
             <!-- Circuit 4 -->
             <div class="circuit-card">
-                <div class="circuit-header">
-                    <div class="circuit-title" data-i18n="circuit4">Circuit 4</div>
-                </div>
-                <div class="circuit-pressure" id="pressure-display-4" style="display: none;">
-                    <span id="pressure-ch4">---</span>
-                    <span class="channel-unit">mbar</span>
-                    <span class="vacuum-indicator" id="vacuum-ch4"></span>
-                </div>
+                <div class="circuit-title" data-i18n="circuit4">Circuit 4</div>
                 <button class="btn btn-mode-toggle" id="mode-display-4" onclick="toggleMode(4)">
-                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-4" data-i18n="compressedAir">Compressed Air</span>
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-4" data-i18n="compressedAir">Compressed Air</span> | <span id="pressure-ch4">---</span> <span class="mode-unit">mbar</span>
                 </button>
                 <div class="circuit-controls">
                     <button class="btn btn-activate" id="activate-btn-4" onclick="toggleActivation(4)">
@@ -107,15 +79,15 @@
 
 
         <div class="info-box">
-            <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
-                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate" style="padding: 8px 16px; font-size: 0.9em;">Calibrate</button>
-                <button class="btn btn-secondary" onclick="toggleUnit()" style="padding: 8px 16px; font-size: 0.9em;"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
+            <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate" style="padding: 12px 20px; font-size: 1.1em; min-height: 44px;">Calibrate</button>
+                <button class="btn btn-secondary" onclick="toggleUnit()" style="padding: 12px 20px; font-size: 1.1em; min-height: 44px;"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
                 |
-                <a href="/signals" style="color: #4b6cb7; text-decoration: none; font-weight: bold;"><span data-i18n="signalsPage">Digital Signals</span></a>
+                <a href="/signals" style="color: #4b6cb7; text-decoration: none; font-weight: bold; font-size: 1.1em;"><span data-i18n="signalsPage">Digital Signals</span></a>
                 |
-                <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;"><span data-i18n="debugPage">Debug Page</span></a>
+                <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold; font-size: 1.1em;"><span data-i18n="debugPage">Debug Page</span></a>
                 |
-                <button class="btn btn-danger" onclick="shutdownRaspberry()" style="padding: 8px 16px; font-size: 0.9em;">
+                <button class="btn btn-danger" onclick="shutdownRaspberry()" style="padding: 12px 20px; font-size: 1.1em; min-height: 44px;">
                     <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
                 </button>
             </p>
