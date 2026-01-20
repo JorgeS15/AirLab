@@ -5,6 +5,72 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.8] - 2025-12-16
+
+### 🎨 UI Refinements and Simplification
+- **Blue Mode Button**: Changed mode button from grey to blue (#4b6cb7) for better visual hierarchy
+- **Simplified Mode Display**: Removed "Mode:" label - now shows only active mode (e.g., "Compressed Air" or "Vacuum | 123 mbar")
+- **Reduced Font Sizes**: Adjusted font sizes for better balance on 800x480 touchscreen
+  - Circuit titles: 3.2em → 2.2em
+  - Mode button: 2.6em → 1.8em
+  - Activate button: 2.6em → 1.8em
+- **Cleaner Interface**: Less clutter, more focus on essential information
+
+### 🐛 Bug Fixes
+- **Version Display**: Updated version to 2.1.8 in index.html header
+- **Message Positioning**: Moved error/success messages to bottom of page (below all controls)
+
+## [2.1.7] - 2025-12-16
+
+### 🎯 Conditional Pressure Display
+- **Smart Pressure Visibility**: Pressure value now only displays when in Vacuum mode
+  - Compressed Air mode: Shows only `Mode: Compressed Air`
+  - Vacuum mode: Shows `Mode: Vacuum | 123 mbar`
+  - Cleaner display with relevant information only
+
+### 🔤 MASSIVE Font Size Increases
+- **Maximum visibility for 800x480 touchscreen HMI**
+  - Circuit titles: 2.4em → 3.2em (33% larger)
+  - Mode button: 1.9em → 2.6em (37% larger)
+  - Activate button: 2em → 2.6em (30% larger)
+  - All text perfectly centered for professional HMI appearance
+
+### 🎨 UI Optimization
+- **Perfect Centering**: All elements in circuit cards perfectly centered
+- **Inline Pressure Display**: Pressure appears inline with mode text (not block)
+- **Cleaner Information Hierarchy**: Only relevant data shown at the right time
+
+## [2.1.6] - 2025-12-16
+
+### 🎯 Complete HMI Redesign
+- **Centered All Content**: All text and buttons now centered in circuit cards for cleaner, professional HMI appearance
+- **Always Visible Pressure**: Pressure display now always visible (merged into mode button)
+- **Option A Layout**: `Mode: Compressed Air | 123 mbar` - all information in one line
+
+### 🔤 Even BIGGER Text for Better Readability
+- **Massive font size increases for touchscreen visibility**
+  - Circuit titles: 2.2em → 2.4em (centered)
+  - Mode + Pressure button: 1.5em → 1.9em (27% larger for easy reading of values)
+  - Activate button: 1.8em → 2em (11% larger)
+  - Activate button font-weight: bold → 900 (ultra-bold)
+  - Bottom bar buttons: 0.9em → 1.1em (22% larger)
+  - Bottom bar links: Added 1.1em font size
+
+### 🎨 UI Polish and Refinements
+- **Visual Separators**: Added subtle blue borders around circuit cards for better separation
+- **More Compact Header**: Reduced padding (10px → 8px) for more screen space
+- **Touch-Friendly Bottom Bar**:
+  - All buttons now min-height: 44px (Apple's recommended touch target)
+  - Increased padding: 8px 16px → 12px 20px
+  - Bigger gap between elements: 10px → 12px
+- **Bolder Activate Button**: font-weight: 900 with letter-spacing for maximum impact
+
+### 📐 Simplified Layout
+- **Removed separate header sections** - circuit title stands alone (centered)
+- **Removed conditional pressure display** - always visible for consistency
+- **Full-width activate button** - removed max-width constraint
+- **Cleaner card structure**: Title → Mode/Pressure → Activate (all centered)
+
 ## [2.1.5] - 2025-12-16
 
 ### 🔤 Even Larger Text for HMI
