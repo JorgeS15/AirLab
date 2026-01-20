@@ -5,6 +5,19 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.3] - 2025-12-16
+
+### 🎨 Changed
+- **UI Improvements**: Enhanced main page layout and organization
+  - Centered the "AirLab - Pneumatic Test Bench" title
+  - Moved Calibrate and Unit buttons to the bottom info bar (same row as page links and Shutdown button)
+  - Consolidated all navigation and action buttons into a single row for better UI consistency
+
+### 🐛 Fixed
+- **Removed Broken Emoji Characters**: Cleaned up all malformed emoji symbols from the index page
+  - Removed broken emoji characters that were displaying as "ðŸ'¨", "ðŸ"", "ðŸ"´", etc.
+  - Improved page rendering and character encoding
+
 ## [2.1.2] - 2025-12-16
 
 ### 🔧 Changed

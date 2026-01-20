@@ -10,10 +10,10 @@
 <body>
     <div class="container">
         <header>
-            <h1>
+            <h1 style="text-align: center;">
                 <span class="status-indicator" id="statusIndicator"></span>
-                ðŸ'¨ <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
-                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v2.1.0</span>
+                <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
+                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v2.1.3</span>
             </h1>
             <div class="language-selector">
                 <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
@@ -113,18 +113,18 @@
             </div>
         </div>
 
-        <div class="calibration-panel">
-            <div class="calibration-buttons">
-                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate">Calibrate</button>
-                <button class="btn btn-secondary" onclick="toggleUnit()"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
-            </div>
-        </div>
 
         <div class="info-box">
             <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <a href="/signals" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">📡 <span data-i18n="signalsPage">Digital Signals</span></a> | <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">ðŸ” <span data-i18n="debugPage">Debug Page</span></a>
+                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate" style="padding: 8px 16px; font-size: 0.9em;">Calibrate</button>
+                <button class="btn btn-secondary" onclick="toggleUnit()" style="padding: 8px 16px; font-size: 0.9em;"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
+                |
+                <a href="/signals" style="color: #4b6cb7; text-decoration: none; font-weight: bold;"><span data-i18n="signalsPage">Digital Signals</span></a>
+                |
+                <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;"><span data-i18n="debugPage">Debug Page</span></a>
+                |
                 <button class="btn btn-danger" onclick="shutdownRaspberry()" style="padding: 8px 16px; font-size: 0.9em;">
-                    ðŸ”´ <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
+                    <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
                 </button>
             </p>
         </div>
