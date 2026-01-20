@@ -10,81 +10,113 @@
 <body>
     <div class="container">
         <header>
-            <h1>
+            <h1 style="text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px; position: relative;">
                 <span class="status-indicator" id="statusIndicator"></span>
-                ðŸ’¨ <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
-                <span style="font-size: 0.5em; color: #999; margin-left: 10px;">v1.5.0</span>
+                <span data-i18n="title">AirLab - Pneumatic Test Bench</span>
+                <span style="font-size: 0.5em; color: #999;">v2.1.5</span>
+                <span style="position: absolute; right: 0; display: flex; gap: 5px;">
+                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')" style="padding: 6px 12px; font-size: 0.5em;">EN</button>
+                    <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')" style="padding: 6px 12px; font-size: 0.5em;">PT</button>
+                </span>
             </h1>
-            <div class="language-selector">
-                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
-            </div>
         </header>
 
         <div id="messageContainer"></div>
 
-        <div class="channels-grid">
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum1">Vacuum 1</div>
-                    <span class="status-badge status-ok" id="status-ch1">OK</span>
+        <div class="circuits-grid">
+            <!-- Circuit 1 -->
+            <div class="circuit-card">
+                <div class="circuit-header">
+                    <div class="circuit-title" data-i18n="circuit1">Circuit 1</div>
                 </div>
-                <div class="channel-value pressure-value">
+                <div class="circuit-pressure" id="pressure-display-1" style="display: none;">
                     <span id="pressure-ch1">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch1"></span>
                 </div>
+                <button class="btn btn-mode-toggle" id="mode-display-1" onclick="toggleMode(1)">
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-1" data-i18n="compressedAir">Compressed Air</span>
+                </button>
+                <div class="circuit-controls">
+                    <button class="btn btn-activate" id="activate-btn-1" onclick="toggleActivation(1)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum2">Vacuum 2</div>
-                    <span class="status-badge status-ok" id="status-ch2">OK</span>
+            <!-- Circuit 2 -->
+            <div class="circuit-card">
+                <div class="circuit-header">
+                    <div class="circuit-title" data-i18n="circuit2">Circuit 2</div>
                 </div>
-                <div class="channel-value pressure-value">
+                <div class="circuit-pressure" id="pressure-display-2" style="display: none;">
                     <span id="pressure-ch2">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch2"></span>
                 </div>
+                <button class="btn btn-mode-toggle" id="mode-display-2" onclick="toggleMode(2)">
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-2" data-i18n="compressedAir">Compressed Air</span>
+                </button>
+                <div class="circuit-controls">
+                    <button class="btn btn-activate" id="activate-btn-2" onclick="toggleActivation(2)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum3">Vacuum 3</div>
-                    <span class="status-badge status-ok" id="status-ch3">OK</span>
+            <!-- Circuit 3 -->
+            <div class="circuit-card">
+                <div class="circuit-header">
+                    <div class="circuit-title" data-i18n="circuit3">Circuit 3</div>
                 </div>
-                <div class="channel-value pressure-value">
+                <div class="circuit-pressure" id="pressure-display-3" style="display: none;">
                     <span id="pressure-ch3">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch3"></span>
                 </div>
+                <button class="btn btn-mode-toggle" id="mode-display-3" onclick="toggleMode(3)">
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-3" data-i18n="compressedAir">Compressed Air</span>
+                </button>
+                <div class="circuit-controls">
+                    <button class="btn btn-activate" id="activate-btn-3" onclick="toggleActivation(3)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="channel-card">
-                <div class="channel-header">
-                    <div class="channel-title" data-i18n="vacuum4">Vacuum 4</div>
-                    <span class="status-badge status-ok" id="status-ch4">OK</span>
+            <!-- Circuit 4 -->
+            <div class="circuit-card">
+                <div class="circuit-header">
+                    <div class="circuit-title" data-i18n="circuit4">Circuit 4</div>
                 </div>
-                <div class="channel-value pressure-value">
+                <div class="circuit-pressure" id="pressure-display-4" style="display: none;">
                     <span id="pressure-ch4">---</span>
                     <span class="channel-unit">mbar</span>
                     <span class="vacuum-indicator" id="vacuum-ch4"></span>
                 </div>
+                <button class="btn btn-mode-toggle" id="mode-display-4" onclick="toggleMode(4)">
+                    <span data-i18n="mode">Mode</span>: <span class="mode-value" id="mode-value-4" data-i18n="compressedAir">Compressed Air</span>
+                </button>
+                <div class="circuit-controls">
+                    <button class="btn btn-activate" id="activate-btn-4" onclick="toggleActivation(4)">
+                        <span data-i18n="activate">Activate</span>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="calibration-panel">
-            <div class="calibration-buttons">
-                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate">Calibrate</button>
-                <button class="btn btn-secondary" onclick="toggleUnit()"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
-            </div>
-        </div>
 
         <div class="info-box">
-            <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <a href="/signals" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">📡 <span data-i18n="signalsPage">Digital Signals</span></a> | <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;">ðŸ” <span data-i18n="debugPage">Debug Page</span></a>
+            <p class="info-text" style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="calibrateAll()" data-i18n="calibrate" style="padding: 8px 16px; font-size: 0.9em;">Calibrate</button>
+                <button class="btn btn-secondary" onclick="toggleUnit()" style="padding: 8px 16px; font-size: 0.9em;"><span data-i18n="unit">Unit</span>: <span id="unitToggleText">mbar</span></button>
+                |
+                <a href="/signals" style="color: #4b6cb7; text-decoration: none; font-weight: bold;"><span data-i18n="signalsPage">Digital Signals</span></a>
+                |
+                <a href="/debug" style="color: #4b6cb7; text-decoration: none; font-weight: bold;"><span data-i18n="debugPage">Debug Page</span></a>
+                |
                 <button class="btn btn-danger" onclick="shutdownRaspberry()" style="padding: 8px 16px; font-size: 0.9em;">
-                    ðŸ”´ <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
+                    <span data-i18n="shutdown">Shutdown Raspberry Pi</span>
                 </button>
             </p>
         </div>
@@ -154,8 +186,11 @@
                             const pressure = ch.pressure_mbar;
                             const displayValue = convertToDisplayValue(pressure);
                             const unit = getCurrentUnit();
-                            
-                            document.getElementById(`pressure-ch${i}`).textContent = displayValue;
+
+                            const pressureElement = document.getElementById(`pressure-ch${i}`);
+                            if (pressureElement) {
+                                pressureElement.textContent = displayValue;
+                            }
                             
                             // Update unit display
                             const unitSpans = document.querySelectorAll('.channel-unit');
@@ -165,19 +200,14 @@
                             
                             // Update vacuum indicator
                             const vacuumIndicator = document.getElementById(`vacuum-ch${i}`);
-                            if (pressure < -50) {
-                                vacuumIndicator.textContent = 'ðŸ’¨';
-                                vacuumIndicator.title = 'Vacuum active';
-                            } else {
-                                vacuumIndicator.textContent = '';
+                            if (vacuumIndicator) {
+                                if (pressure < -50) {
+                                    vacuumIndicator.textContent = '\uD83D\uDCA8';
+                                    vacuumIndicator.title = 'Vacuum active';
+                                } else {
+                                    vacuumIndicator.textContent = '';
+                                }
                             }
-                            
-                            // Update status badge
-                            const statusBadge = document.getElementById(`status-ch${i}`);
-                            statusBadge.textContent = ch.status;
-                            statusBadge.className = 'status-badge ' + 
-                                (ch.status === 'OK' ? 'status-ok' : 
-                                 ch.status === 'ERROR' ? 'status-error' : 'status-warning');
                         }
                         
                         // Clear any error messages
@@ -263,11 +293,159 @@
             }
         }
 
+        // Circuit Control Functions
+        // DOs 1-4: Activate circuits 1-4
+        // DOs 5-8: Switch mode (0=vacuum, 1=compressed air) for circuits 1-4
+
+        function toggleMode(circuitNum) {
+            // Mode is controlled by DO (4 + circuitNum), i.e., DOs 5-8
+            const modeOutput = 4 + circuitNum;
+
+            fetch('/api/outputs')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const outputKey = 'output_' + modeOutput;
+                        const currentMode = data.outputs[outputKey]?.value ?? data.outputs[outputKey] ?? 0;
+                        const newMode = currentMode === 1 ? 0 : 1;
+
+                        // Set the new mode
+                        setOutput(modeOutput, newMode);
+                    }
+                })
+                .catch(error => {
+                    showError('Error reading mode: ' + error);
+                });
+        }
+
+        function toggleActivation(circuitNum) {
+            // Activation is controlled by DO circuitNum, i.e., DOs 1-4
+            fetch('/api/outputs')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const outputKey = 'output_' + circuitNum;
+                        const currentActivation = data.outputs[outputKey]?.value ?? data.outputs[outputKey] ?? 0;
+                        const newActivation = currentActivation === 1 ? 0 : 1;
+
+                        // Set the new activation state
+                        setOutput(circuitNum, newActivation);
+                    }
+                })
+                .catch(error => {
+                    showError('Error reading activation: ' + error);
+                });
+        }
+
+        function setOutput(outputNum, value) {
+            fetch('/api/outputs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    output: outputNum,
+                    value: value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Force immediate update of circuit status
+                    setTimeout(updateCircuitStatus, 100);
+                } else {
+                    showError('Failed to set output: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showError('Error setting output: ' + error);
+            });
+        }
+
+        function updateCircuitStatus() {
+            fetch('/api/outputs')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Convert outputs object to array if needed
+                        let outputsArray;
+                        if (Array.isArray(data.outputs)) {
+                            outputsArray = data.outputs;
+                        } else {
+                            // If it's an object with string keys ('output_1', 'output_2', etc.), convert to array
+                            outputsArray = [];
+                            for (let i = 1; i <= 8; i++) {
+                                const outputKey = 'output_' + i;
+                                outputsArray[i - 1] = data.outputs[outputKey]?.value ?? data.outputs[outputKey] ?? 0;
+                            }
+                        }
+
+                        // Update all 4 circuits
+                        for (let i = 1; i <= 4; i++) {
+                            // Get activation state (DOs 1-4)
+                            const activationState = outputsArray[i - 1];
+                            // Get mode state (DOs 5-8)
+                            const modeState = outputsArray[i + 3]; // Index 4-7 for DOs 5-8
+
+                            // Update mode display
+                            const modeValueElement = document.getElementById(`mode-value-${i}`);
+                            const pressureDisplay = document.getElementById(`pressure-display-${i}`);
+
+                            if (modeValueElement) {
+                                if (modeState === 1) {
+                                    // Vacuum mode (output 1)
+                                    const vacuumText = translations[currentLang]?.vacuum || 'Vacuum';
+                                    modeValueElement.textContent = vacuumText;
+                                    modeValueElement.setAttribute('data-i18n', 'vacuum');
+                                    // Show pressure display in vacuum mode
+                                    if (pressureDisplay) {
+                                        pressureDisplay.style.display = 'block';
+                                    }
+                                } else {
+                                    // Compressed air mode (output 0, default)
+                                    const airText = translations[currentLang]?.compressedAir || 'Compressed Air';
+                                    modeValueElement.textContent = airText;
+                                    modeValueElement.setAttribute('data-i18n', 'compressedAir');
+                                    // Hide pressure display in compressed air mode
+                                    if (pressureDisplay) {
+                                        pressureDisplay.style.display = 'none';
+                                    }
+                                }
+                            }
+
+                            // Update activation button
+                            const activateBtn = document.getElementById(`activate-btn-${i}`);
+                            if (activateBtn) {
+                                const btnSpan = activateBtn.querySelector('span');
+                                if (btnSpan) {
+                                    if (activationState === 1) {
+                                        const deactivateText = translations[currentLang]?.deactivate || 'Deactivate';
+                                        btnSpan.textContent = deactivateText;
+                                        btnSpan.setAttribute('data-i18n', 'deactivate');
+                                        activateBtn.classList.add('active');
+                                    } else {
+                                        const activateText = translations[currentLang]?.activate || 'Activate';
+                                        btnSpan.textContent = activateText;
+                                        btnSpan.setAttribute('data-i18n', 'activate');
+                                        activateBtn.classList.remove('active');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating circuit status:', error);
+                });
+        }
+
         // Auto-refresh every 500ms (2 Hz)
         setInterval(updateData, 500);
-        
+        setInterval(updateCircuitStatus, 500);
+
         // Initial load
         updateData();
+        updateCircuitStatus();
     </script>
 </body>
 </html>

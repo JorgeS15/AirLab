@@ -5,6 +5,146 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.5] - 2025-12-16
+
+### 🔤 Even Larger Text for HMI
+- **Further increased font sizes for better touchscreen visibility**
+  - Circuit titles: 1.6em → 2.2em (38% larger)
+  - Pressure display: 2.8em → 3.5em (25% larger)
+  - Mode button: NEW 1.5em (consolidated design)
+  - Activate button: 1.4em → 1.8em (29% larger)
+
+### 🎨 UI Simplification
+- **Merged Mode Display with Switch Button**
+  - Removed separate "Switch Mode" button from circuit header
+  - Converted mode display into clickable toggle button (like Unit button)
+  - Now shows "Mode: Compressed Air" or "Mode: Vacuum" as single button
+  - Click to toggle between modes - saves space and simplifies UI
+
+### 🌐 Language Selector Repositioned
+- **Moved EN/PT buttons to header top-right**
+  - Relocated from bottom bar to header (after version number)
+  - Better visibility and easier access
+  - Cleaner bottom bar layout
+
+### 📐 Layout Optimization
+- **Simplified Circuit Card Structure**
+  - Circuit title only in header (no extra buttons)
+  - Pressure display (when in Vacuum mode)
+  - Mode toggle button (full width, prominent)
+  - Activate/Deactivate button (centered, large)
+  - Cleaner, more touch-friendly layout
+
+## [2.1.4] - 2025-12-16
+
+### 🎯 HMI Optimization
+- **Optimized for 7-inch 800x480 Touchscreen Display**
+  - Reduced padding and margins throughout the interface for better space utilization
+  - Removed unnecessary whitespace in circuit cards
+  - Eliminated scrolling - everything now fits on screen
+  - Removed hover effects (not needed for touch interface)
+
+### 🔤 Enhanced Visibility
+- **Increased Font Sizes for Touch Interface**
+  - Circuit titles: 1.3em → 1.6em (23% larger)
+  - Pressure display: 2em → 2.8em (40% larger)
+  - Mode text: 1em → 1.3em (30% larger)
+  - Activate button: 1.2em → 1.4em (17% larger)
+  - Switch Mode button: 0.9em → 1.1em (22% larger)
+
+### 🎨 Layout Improvements
+- **Moved Language Selector to Bottom Bar**
+  - Relocated EN/PT buttons from header to bottom navigation bar
+  - Freed up header space for better title visibility
+  - Consolidated all controls in single bottom row
+
+### 📏 Spacing Optimization
+- **Reduced Padding Throughout**
+  - Body padding: 20px → 10px
+  - Header padding: 20px → 10px 15px
+  - Circuit card padding: 20px → 12px
+  - Grid gaps: 20px → 10px
+  - Margin reductions: 15-20px → 8-10px
+
+## [2.1.3] - 2025-12-16
+
+### 🎨 Changed
+- **UI Improvements**: Enhanced main page layout and organization
+  - Centered the "AirLab - Pneumatic Test Bench" title
+  - Moved Calibrate and Unit buttons to the bottom info bar (same row as page links and Shutdown button)
+  - Consolidated all navigation and action buttons into a single row for better UI consistency
+
+### 🐛 Fixed
+- **Removed Broken Emoji Characters**: Cleaned up all malformed emoji symbols from the index page
+  - Removed broken emoji characters that were displaying as "ðŸ'¨", "ðŸ"", "ðŸ"´", etc.
+  - Improved page rendering and character encoding
+
+## [2.1.2] - 2025-12-16
+
+### 🔧 Changed
+- **Mode Logic Inversion**: Updated digital output mapping for circuit modes
+  - Compressed Air is now the default mode (output = 0)
+  - Vacuum mode now uses output = 1
+  - Updated all circuit cards to display "Compressed Air" as default
+  - Pressure display now hidden by default (only visible in Vacuum mode)
+
+### 🐛 Fixed
+- **Portuguese Translation Encoding**: Fixed UTF-8 encoding issues in translations.js
+  - Corrected special characters: "Pneumáticos", "Vácuo", "Página", etc.
+  - Fixed all Portuguese text to display properly with accents and special characters
+
+## [2.1.1] - 2025-12-16
+
+### 🎨 Changed
+- **Circuit Card Layout**: Improved UI organization
+  - Moved "Switch Mode" button to header (next to circuit title) for cleaner layout
+  - Moved "Activate/Deactivate" button to bottom of card (centered, larger) for better visibility
+  - Increased activate button size for better accessibility (bigger padding, 1.2em font)
+  - Reduced switch mode button size for better visual hierarchy (smaller padding, 0.9em font)
+- **Code Cleanup**: Removed all debug console.log statements for cleaner console output
+
+### 🐛 Fixed
+- Fixed CSS styling for new button positions and sizes
+- Improved button visual hierarchy and user experience
+
+## [2.1.0] - 2025-12-09
+
+### ✨ Added
+- **Circuit Control Interface**: Added comprehensive circuit control panel to main page
+  - 4 independent circuits with individual controls
+  - Mode switching: Toggle between Vacuum and Compressed Air for each circuit
+  - Circuit activation: Individual activation buttons for each circuit
+- **Digital Output Integration**:
+  - DOs 1-4: Control circuit activation (ON/OFF)
+  - DOs 5-8: Control mode switching (Vacuum=0, Compressed Air=1)
+- **Real-Time Status Display**:
+  - Live visual indicators for mode (Blue=Vacuum, Orange=Compressed Air)
+  - Active state indicators (Green=Active, Gray=Inactive)
+  - Dynamic button labels (Activate/Deactivate)
+- **Bilingual Support**: Full English and Portuguese translations for circuit controls
+- **Auto-Refresh**: Circuit status updates automatically at 2Hz alongside pressure monitoring
+
+### 🔧 Changed
+- **Main Page Layout**: Added dedicated "Circuit Controls" section between vacuum monitoring and calibration panel
+- **CSS Enhancements**: New styling for circuit cards with hover effects and responsive design
+- **JavaScript Functions**:
+  - `toggleMode(circuitNum)`: Switch between vacuum/compressed air
+  - `toggleActivation(circuitNum)`: Activate/deactivate circuits
+  - `updateCircuitStatus()`: Auto-refresh circuit states from digital outputs
+
+### 📚 Documentation
+- Updated version numbers across all files (app.py, index.html)
+- Enhanced translation system with circuit-specific terminology
+
+### Technical Details
+- **API Endpoints Used**:
+  - GET `/api/outputs`: Read current digital output states
+  - POST `/api/outputs`: Set individual output states
+- **Grid Layout**: 2x2 responsive grid for circuit cards
+- **Mobile Support**: Responsive design adapts to single column on small screens
+
+---
+
 ## [2.0.2] - 2025-12-05
 
 ### 🎯 Major Update: Unified EtherCAT Control

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 AirLab - Pneumatic Test Bench System
-Version: 1.5.0
+Version: 2.1.0
 Changes:
+  - v2.1.0: Added circuit controls to main page with mode switching (vacuum/compressed air) and activation buttons
   - v1.5.0: Reorganized UI - moved buttons to bottom, Reset moved to debug page, cleaned docs
   - v1.4.1: Changed icon to Ã°Å¸â€™Â¨, blue theme, simplified buttons, default unit bar
   - v1.4.0: Added mbar/bar unit toggle, simplified main page, renamed to AirLab
@@ -18,7 +19,7 @@ import json
 import os
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-VERSION = "1.5.0"
+VERSION = "2.1.5"
 PROJECT_NAME = "AirLab"
 
 # File to store calibration offsets

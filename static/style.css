@@ -10,7 +10,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
     min-height: 100vh;
-    padding: 20px;
+    padding: 10px;
 }
 
 .container {
@@ -20,10 +20,10 @@ body {
 
 header {
     background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
 }
 
 h1 {
@@ -306,4 +306,115 @@ h1 {
     color: #333;
     font-weight: bold;
     font-family: 'Courier New', monospace;
+}
+
+/* Circuit Controls Styles */
+.section-header {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.circuits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .circuits-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.circuit-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.circuit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.circuit-title {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.circuit-pressure {
+    font-size: 3.5em;
+    font-weight: bold;
+    color: #4b6cb7;
+    text-align: center;
+    margin: 8px 0;
+}
+
+.circuit-pressure .channel-unit {
+    font-size: 0.4em;
+    color: #666;
+    margin-left: 5px;
+}
+
+.circuit-pressure .vacuum-indicator {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 0.6em;
+}
+
+.btn-mode-toggle {
+    background: #6c757d;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 8px;
+    min-height: 50px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-mode-toggle .mode-value {
+    color: #fff;
+    margin-left: 8px;
+}
+
+.circuit-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.btn-activate {
+    background: #28a745;
+    color: white;
+    padding: 14px 40px;
+    font-size: 1.8em;
+    font-weight: bold;
+    width: 100%;
+    max-width: 350px;
+    min-height: 56px;
+}
+
+.btn-activate.active {
+    background: #dc3545;
 }
