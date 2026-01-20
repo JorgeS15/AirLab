@@ -5,6 +5,36 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.5] - 2025-12-16
+
+### 🔤 Even Larger Text for HMI
+- **Further increased font sizes for better touchscreen visibility**
+  - Circuit titles: 1.6em → 2.2em (38% larger)
+  - Pressure display: 2.8em → 3.5em (25% larger)
+  - Mode button: NEW 1.5em (consolidated design)
+  - Activate button: 1.4em → 1.8em (29% larger)
+
+### 🎨 UI Simplification
+- **Merged Mode Display with Switch Button**
+  - Removed separate "Switch Mode" button from circuit header
+  - Converted mode display into clickable toggle button (like Unit button)
+  - Now shows "Mode: Compressed Air" or "Mode: Vacuum" as single button
+  - Click to toggle between modes - saves space and simplifies UI
+
+### 🌐 Language Selector Repositioned
+- **Moved EN/PT buttons to header top-right**
+  - Relocated from bottom bar to header (after version number)
+  - Better visibility and easier access
+  - Cleaner bottom bar layout
+
+### 📐 Layout Optimization
+- **Simplified Circuit Card Structure**
+  - Circuit title only in header (no extra buttons)
+  - Pressure display (when in Vacuum mode)
+  - Mode toggle button (full width, prominent)
+  - Activate/Deactivate button (centered, large)
+  - Cleaner, more touch-friendly layout
+
 ## [2.1.4] - 2025-12-16
 
 ### 🎯 HMI Optimization

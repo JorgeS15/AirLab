@@ -353,13 +353,13 @@ h1 {
 }
 
 .circuit-title {
-    font-size: 1.6em;
+    font-size: 2.2em;
     font-weight: bold;
     color: #333;
 }
 
 .circuit-pressure {
-    font-size: 2.8em;
+    font-size: 3.5em;
     font-weight: bold;
     color: #4b6cb7;
     text-align: center;
@@ -378,25 +378,24 @@ h1 {
     font-size: 0.6em;
 }
 
-.circuit-mode {
-    font-size: 1.3em;
-    color: #666;
-    margin-bottom: 8px;
-    padding: 8px;
-    background: #f8f9fa;
+.btn-mode-toggle {
+    background: #6c757d;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.5em;
+    font-weight: bold;
     border-radius: 5px;
+    width: 100%;
+    margin-bottom: 8px;
+    min-height: 50px;
+    border: none;
+    cursor: pointer;
     text-align: center;
 }
 
-.mode-label {
-    font-weight: 600;
-    color: #333;
-}
-
-.mode-value {
-    font-weight: bold;
-    color: #4b6cb7;
-    margin-left: 5px;
+.btn-mode-toggle .mode-value {
+    color: #fff;
+    margin-left: 8px;
 }
 
 .circuit-controls {
@@ -405,24 +404,15 @@ h1 {
     margin-top: 8px;
 }
 
-.btn-mode {
-    background: #6c757d;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1.1em;
-    border-radius: 5px;
-    min-height: 44px;
-}
-
 .btn-activate {
     background: #28a745;
     color: white;
-    padding: 12px 40px;
-    font-size: 1.4em;
+    padding: 14px 40px;
+    font-size: 1.8em;
     font-weight: bold;
     width: 100%;
-    max-width: 300px;
-    min-height: 48px;
+    max-width: 350px;
+    min-height: 56px;
 }
 
 .btn-activate.active {

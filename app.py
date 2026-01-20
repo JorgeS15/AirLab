@@ -19,7 +19,7 @@ import json
 import os
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-VERSION = "2.1.4"
+VERSION = "2.1.5"
 PROJECT_NAME = "AirLab"
 
 # File to store calibration offsets
