@@ -14,24 +14,25 @@ Changes:
 """
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from datetime import datetime
-from collections import deque
+
 import json
 import os
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-VERSION = "2.1.8"
+VERSION = "2.1.9"
 PROJECT_NAME = "AirLab"
 
 # File to store calibration offsets
 OFFSET_FILE = '/tmp/vacuum_offsets.json'
 
-# Moving average buffers for each channel (store last 10 samples)
-BUFFER_SIZE = 10
-channel_buffers = {
-    'ch1': deque(maxlen=BUFFER_SIZE),
-    'ch2': deque(maxlen=BUFFER_SIZE),
-    'ch3': deque(maxlen=BUFFER_SIZE),
-    'ch4': deque(maxlen=BUFFER_SIZE)
+# Exponential Moving Average (EMA) state for each channel
+# alpha=0.7: reaches 87% of a step change in one 500ms poll cycle
+EMA_ALPHA = 0.7
+ema_state = {
+    'ch1': None,
+    'ch2': None,
+    'ch3': None,
+    'ch4': None
 }
 
 def load_offsets():
@@ -62,20 +63,23 @@ def raw_to_pressure(raw_value, offset):
     pressure_mbar = calibrated_raw - 1000
     return pressure_mbar
 
-def calculate_moving_average(channel_name, new_value):
+def calculate_ema(channel_name, new_value):
     """
-    Calculate moving average for a channel
-    Adds new value to buffer and returns average of all values in buffer
+    Exponential Moving Average: ema = alpha * new + (1-alpha) * prev
+    On first call after clear, returns new_value directly for instant lock-on.
     """
-    channel_buffers[channel_name].append(new_value)
-    if len(channel_buffers[channel_name]) > 0:
-        return sum(channel_buffers[channel_name]) / len(channel_buffers[channel_name])
-    return new_value
+    prev = ema_state[channel_name]
+    if prev is None:
+        ema_state[channel_name] = new_value
+        return new_value
+    result = EMA_ALPHA * new_value + (1 - EMA_ALPHA) * prev
+    ema_state[channel_name] = result
+    return result
 
 def clear_buffers():
-    """Clear all moving average buffers (useful after calibration)"""
-    for key in channel_buffers:
-        channel_buffers[key].clear()
+    """Reset all EMA states (called after calibration to avoid stale history)"""
+    for key in ema_state:
+        ema_state[key] = None
 
 
 def read_values_from_file():
@@ -96,15 +100,15 @@ def read_values_from_file():
                     # Calculate instant pressure (without averaging)
                     instant_pressure = raw_to_pressure(raw_value, offset)
                     
-                    # Calculate moving average pressure
-                    avg_pressure = calculate_moving_average(ch_name, instant_pressure)
+                    # Calculate EMA pressure
+                    avg_pressure = calculate_ema(ch_name, instant_pressure)
                     
                     result[ch_name] = {
                         'raw_value': raw_value,
                         'offset': offset,
                         'pressure_mbar': round(avg_pressure),  # Rounded to integer
                         'instant_pressure': round(instant_pressure),
-                        'samples_in_avg': len(channel_buffers[ch_name]),
+                        'ema_alpha': EMA_ALPHA,
                         'status': 'OK',
                         'error': False,
                         'underrange': False,
@@ -407,7 +411,7 @@ if __name__ == '__main__':
     print(f"\nAccess the dashboard at: http://<your-pi-ip>:5000")
     print("Make sure ethercat_app is running in another terminal!")
     print("\nFeatures:")
-    print("  - Moving average filter (10 samples) for stable readings")
+    print("  - EMA filter (alpha=0.7) for fast, stable readings")
     print("  - 2Hz refresh rate (500ms)")
     print("  - mbar/bar unit toggle")
     print("\nCalibration:")

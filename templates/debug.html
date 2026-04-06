@@ -33,7 +33,7 @@
 
         <div class="info-box" style="margin-bottom: 20px;">
             <p style="color: #666; line-height: 1.6;">
-                📊 <strong>Moving average filter:</strong> 10 samples for stable readings<br>
+                📊 <strong>EMA filter:</strong> alpha=0.7 for fast, stable readings<br>
                 âš™️ <strong>System status:</strong> Make sure <code>ethercat_app</code> is running!
             </p>
         </div>
@@ -67,7 +67,7 @@
                         <span class="debug-value" id="instant-ch1">--- mbar</span>
                     </div>
                     <div class="debug-row">
-                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-label" data-i18n="filterInfo">Filter:</span>
                         <span class="debug-value" id="samples-ch1">---</span>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         <span class="debug-value" id="instant-ch2">--- mbar</span>
                     </div>
                     <div class="debug-row">
-                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-label" data-i18n="filterInfo">Filter:</span>
                         <span class="debug-value" id="samples-ch2">---</span>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                         <span class="debug-value" id="instant-ch3">--- mbar</span>
                     </div>
                     <div class="debug-row">
-                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-label" data-i18n="filterInfo">Filter:</span>
                         <span class="debug-value" id="samples-ch3">---</span>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                         <span class="debug-value" id="instant-ch4">--- mbar</span>
                     </div>
                     <div class="debug-row">
-                        <span class="debug-label" data-i18n="samplesInAvg">Samples in Avg:</span>
+                        <span class="debug-label" data-i18n="filterInfo">Filter:</span>
                         <span class="debug-value" id="samples-ch4">---</span>
                     </div>
                 </div>
@@ -217,8 +217,8 @@
                                 ch.offset.toLocaleString();
                             document.getElementById(`instant-ch${i}`).textContent = 
                                 `${ch.instant_pressure} mbar`;
-                            document.getElementById(`samples-ch${i}`).textContent = 
-                                `${ch.samples_in_avg}/10`;
+                            document.getElementById(`samples-ch${i}`).textContent =
+                                `EMA α=${ch.ema_alpha}`;
                             
                             // Update status badge
                             const statusBadge = document.getElementById(`status-ch${i}`);
