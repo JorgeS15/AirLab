@@ -5,6 +5,14 @@ All notable changes to AirLab will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.9] - 2026-04-06
+
+### Bug Fixes
+- **Fixed vacuum averaging**: Replaced 10-sample SMA (5-second window, 2.25s lag) with
+  EMA (alpha=0.7). The old SMA capped displayed vacuum at ~-500 mbar during fast pull-downs
+  and made the gauge feel unresponsive. EMA reaches 87% of a step in one 500ms poll cycle,
+  accurately tracking -990 mbar and providing immediate feedback.
+
 ## [2.1.8] - 2025-12-16
 
 ### 🎨 UI Refinements and Simplification

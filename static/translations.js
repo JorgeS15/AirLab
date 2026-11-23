@@ -73,7 +73,7 @@ const translations = {
         rawValue: "Raw Value:",
         offset: "Offset:",
         instantPressure: "Instant Pressure:",
-        samplesInAvg: "Samples in Avg:",
+        filterInfo: "Filter:",
 
         // Info messages
         debugInfo: "Debug information updates at 2Hz",
@@ -84,7 +84,7 @@ const translations = {
         // Calibration instructions
         calibrationTitle: "Calibration Instructions",
         calibrationText: "To calibrate: Expose all suction cups to atmospheric pressure (no vacuum), then click \"Calibrate All Channels\" on the main page to zero the readings.",
-        movingAverage: "Moving average filter: 10 samples for stable readings",
+        movingAverage: "EMA filter: alpha=0.7 for fast, stable readings",
         systemStatus: "System status: Make sure",
         isRunning: "is running!",
 
@@ -149,7 +149,7 @@ const translations = {
         rawValue: "Valor Bruto:",
         offset: "Offset:",
         instantPressure: "Pressão Instantânea:",
-        samplesInAvg: "Amostras na Média:",
+        filterInfo: "Filtro:",
 
         // Info messages
         debugInfo: "Informações de debug atualizadas a 2Hz",
@@ -189,7 +189,7 @@ const translations = {
         // Calibration instructions
         calibrationTitle: "Instruções de Calibração",
         calibrationText: "Para calibrar: Exponha todas as ventosas à pressão atmosférica (sem vácuo), depois clique em \"Calibrar Todos os Canais\" na página principal para zerar as leituras.",
-        movingAverage: "Filtro de média móvel: 10 amostras para leituras estáveis",
+        movingAverage: "Filtro EMA: alpha=0.7 para leituras rápidas e estáveis",
         systemStatus: "Estado do sistema: Certifique-se que",
         isRunning: "está em execução!",
 
